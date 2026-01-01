@@ -53,13 +53,13 @@ export default function About() {
                 </p>
               </div>
             </div>
-            <div className="rounded-lg overflow-hidden">
+            <div className="rounded-lg overflow-hidden shadow-lg group transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
               <Image
                 src="/images/sections/about-mission.jpg"
                 alt="Fuzhou America team gathering"
                 width={600}
                 height={600}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
               />
             </div>
           </div>

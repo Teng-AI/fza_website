@@ -1,7 +1,19 @@
+import Link from "next/link";
+
 export default function Footer() {
+  const navLinks = [
+    { href: "/", label: "Home" },
+    { href: "/about", label: "About" },
+    { href: "/team", label: "Team" },
+    { href: "/support-us", label: "Support Us" },
+    { href: "/conference/2023", label: "Conference" },
+    { href: "/contact", label: "Contact" },
+  ];
+
   return (
     <footer className="bg-cream">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+      {/* CTA Section */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
         <div className="text-center">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif italic text-foreground mb-4">
             Join Our Community
@@ -13,7 +25,7 @@ export default function Footer() {
             href="https://fuzhou.beehiiv.com/subscribe"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-block bg-foreground text-white px-8 py-3 rounded font-semibold hover:bg-foreground/80 transition-colors uppercase tracking-wider text-sm"
+            className="inline-block bg-primary text-white px-8 py-3 rounded font-semibold hover:bg-primary/90 transition-colors uppercase tracking-wider text-sm"
           >
             Start Now
           </a>
@@ -24,7 +36,7 @@ export default function Footer() {
               href="https://www.facebook.com/groups/subtlefuzhoutraits/"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-10 h-10 bg-foreground text-white rounded-full flex items-center justify-center hover:bg-foreground/80 transition-colors"
+              className="w-10 h-10 bg-foreground text-white rounded-full flex items-center justify-center hover:bg-primary transition-colors"
               aria-label="Facebook"
             >
               <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -35,7 +47,7 @@ export default function Footer() {
               href="https://www.instagram.com/fuzhouamerica"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-10 h-10 bg-foreground text-white rounded-full flex items-center justify-center hover:bg-foreground/80 transition-colors"
+              className="w-10 h-10 bg-foreground text-white rounded-full flex items-center justify-center hover:bg-primary transition-colors"
               aria-label="Instagram"
             >
               <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -46,7 +58,7 @@ export default function Footer() {
               href="https://www.linkedin.com/company/fuzhouamerica"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-10 h-10 bg-foreground text-white rounded-full flex items-center justify-center hover:bg-foreground/80 transition-colors"
+              className="w-10 h-10 bg-foreground text-white rounded-full flex items-center justify-center hover:bg-primary transition-colors"
               aria-label="LinkedIn"
             >
               <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -55,13 +67,84 @@ export default function Footer() {
             </a>
             <a
               href="mailto:info@fuzhouamerica.org"
-              className="w-10 h-10 bg-foreground text-white rounded-full flex items-center justify-center hover:bg-foreground/80 transition-colors"
+              className="w-10 h-10 bg-foreground text-white rounded-full flex items-center justify-center hover:bg-primary transition-colors"
               aria-label="Email"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
               </svg>
             </a>
+          </div>
+        </div>
+      </div>
+
+      {/* Footer Bottom */}
+      <div className="border-t border-foreground/10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* Logo & Tagline */}
+            <div>
+              <Link href="/" className="inline-block mb-4">
+                <img
+                  src="/images/logo.png"
+                  alt="Fuzhou America"
+                  className="h-10 w-auto"
+                />
+              </Link>
+              <p className="text-sm text-foreground/70">
+                Connecting Fuzhou Americans to socialize, network, and celebrate heritage.
+              </p>
+              <p className="text-sm text-foreground/50 mt-2">
+                501(c)(3) Nonprofit Organization
+              </p>
+            </div>
+
+            {/* Navigation Links */}
+            <div>
+              <h3 className="font-semibold text-foreground mb-4 uppercase tracking-wider text-sm">
+                Navigation
+              </h3>
+              <ul className="space-y-2">
+                {navLinks.map((link) => (
+                  <li key={link.href}>
+                    <Link
+                      href={link.href}
+                      className="text-sm text-foreground/70 hover:text-primary transition-colors"
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Contact Info */}
+            <div>
+              <h3 className="font-semibold text-foreground mb-4 uppercase tracking-wider text-sm">
+                Contact
+              </h3>
+              <ul className="space-y-2 text-sm text-foreground/70">
+                <li>
+                  <a
+                    href="mailto:info@fuzhouamerica.org"
+                    className="hover:text-primary transition-colors"
+                  >
+                    info@fuzhouamerica.org
+                  </a>
+                </li>
+                <li>
+                  <span className="block">43-28 158th St, Unit B</span>
+                  <span className="block">Flushing, NY 11358</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          {/* Copyright */}
+          <div className="mt-8 pt-8 border-t border-foreground/10 text-center">
+            <p className="text-sm text-foreground/50">
+              &copy; {new Date().getFullYear()} Fuzhou America. All rights reserved.
+            </p>
           </div>
         </div>
       </div>

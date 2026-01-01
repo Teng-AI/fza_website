@@ -21,7 +21,7 @@ export default function Home() {
           </h1>
           <Link
             href="/about"
-            className="inline-block bg-white text-foreground px-8 py-3 rounded font-semibold hover:bg-cream-dark transition-colors uppercase tracking-wider text-sm"
+            className="inline-block bg-white text-primary px-8 py-3 rounded font-semibold hover:bg-cream transition-colors uppercase tracking-wider text-sm"
           >
             Learn More
           </Link>
@@ -51,13 +51,13 @@ export default function Home() {
                 Join our Facebook Group & Newsletter to connect with our community of 8000+ Fuzhou Americans
               </p>
             </div>
-            <div className="rounded-lg overflow-hidden shadow-lg">
+            <div className="rounded-lg overflow-hidden shadow-lg group cursor-pointer transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
               <Image
                 src="/images/sections/community.jpg"
                 alt="Fuzhou American community gathering"
                 width={600}
                 height={400}
-                className="w-full h-auto object-cover"
+                className="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-105"
               />
             </div>
           </div>
@@ -68,13 +68,13 @@ export default function Home() {
       <section className="py-16 sm:py-20 bg-cream">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-8 lg:gap-16 items-center">
-            <div className="rounded-lg overflow-hidden shadow-lg order-2 md:order-1">
+            <div className="rounded-lg overflow-hidden shadow-lg order-2 md:order-1 group cursor-pointer transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
               <Image
                 src="/images/sections/meetup.jpg"
                 alt="Fuzhou American meetup event"
                 width={600}
                 height={400}
-                className="w-full h-auto object-cover"
+                className="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-105"
               />
             </div>
             <div className="text-center md:text-left order-1 md:order-2">
@@ -103,13 +103,13 @@ export default function Home() {
                 We host multiple retreats each year for smaller group gatherings where people can bond over shared experiences and aspirations
               </p>
             </div>
-            <div className="rounded-lg overflow-hidden shadow-lg">
+            <div className="rounded-lg overflow-hidden shadow-lg group cursor-pointer transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
               <Image
                 src="/images/sections/activity.jpg"
                 alt="Community activity"
                 width={600}
                 height={400}
-                className="w-full h-auto object-cover"
+                className="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-105"
               />
             </div>
           </div>
@@ -123,14 +123,14 @@ export default function Home() {
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif italic text-foreground mb-12">
             Fuzhou Americans in the Media
           </h2>
-          <div className="space-y-4 max-w-2xl mx-auto">
+          <div className="space-y-4 max-w-xl mx-auto">
             {mediaLinks.map((link, index) => (
               <a
                 key={index}
                 href={link.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block text-foreground hover:text-primary transition-colors underline"
+                className="block text-foreground hover:text-primary transition-colors underline decoration-foreground/30 hover:decoration-primary"
               >
                 {link.publication}: &ldquo;{link.title}&rdquo;
               </a>

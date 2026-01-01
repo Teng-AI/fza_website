@@ -179,9 +179,9 @@ export default function Conference2023() {
           </p>
           <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
             {whyAttend.map((item) => (
-              <div key={item.title} className="text-center">
-                <div className="w-8 h-0.5 bg-foreground mx-auto mb-4" />
-                <h3 className="text-xl font-bold text-foreground mb-4">{item.title}</h3>
+              <div key={item.title} className="text-center group">
+                <div className="w-8 h-0.5 bg-foreground mx-auto mb-4 group-hover:bg-primary group-hover:w-12 transition-all duration-300" />
+                <h3 className="text-xl font-bold text-foreground mb-4 group-hover:text-primary transition-colors">{item.title}</h3>
                 <p className="text-foreground/70 mb-6">{item.description}</p>
                 <div className="aspect-square overflow-hidden rounded-lg">
                   <Image
@@ -189,7 +189,7 @@ export default function Conference2023() {
                     alt={item.title}
                     width={300}
                     height={300}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                   />
                 </div>
               </div>
@@ -247,16 +247,16 @@ export default function Conference2023() {
           </p>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-5xl mx-auto">
             {communityChapters.map((chapter, index) => (
-              <div key={index} className="relative aspect-square overflow-hidden rounded-lg">
+              <div key={index} className="relative aspect-square overflow-hidden rounded-lg group cursor-pointer">
                 <Image
                   src={chapter.image}
                   alt={chapter.name || `Community chapter ${index + 1}`}
                   width={400}
                   height={400}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                 />
                 {chapter.name && (
-                  <div className="absolute top-4 left-4 bg-white/90 px-3 py-1 rounded text-sm font-semibold">
+                  <div className="absolute top-4 left-4 bg-white/90 px-3 py-1 rounded text-sm font-semibold group-hover:bg-white transition-colors">
                     {chapter.name}
                   </div>
                 )}

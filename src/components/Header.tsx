@@ -105,7 +105,7 @@ export default function Header() {
               href="https://bit.ly/sitebuttons"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-foreground text-white px-5 py-2 rounded hover:bg-foreground/80 transition-colors font-medium tracking-wide text-sm"
+              className="bg-primary text-white px-5 py-2 rounded hover:bg-primary/90 transition-colors font-medium tracking-wide text-sm"
             >
               JOIN OUR COMMUNITY
             </a>
@@ -199,7 +199,7 @@ export default function Header() {
                 href="https://bit.ly/sitebuttons"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-foreground text-white px-6 py-2 rounded hover:bg-foreground/80 transition-colors font-medium text-center mt-2"
+                className="bg-primary text-white px-6 py-2 rounded hover:bg-primary/90 transition-colors font-medium text-center mt-2"
               >
                 JOIN OUR COMMUNITY
               </a>
