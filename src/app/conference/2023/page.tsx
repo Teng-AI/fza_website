@@ -41,22 +41,18 @@ export default function Conference2023() {
   ];
 
   const schedule = [
-    { type: "header", time: "9:30AM - 10:30AM", title: "REGISTRATION" },
-    { type: "header", time: "10:30AM - 5:00PM", title: "CONFERENCE TIME" },
-    { type: "header", time: "9:00PM", title: "21+ AFTERPARTY" },
-    { type: "divider" },
-    { type: "session", title: "Opening Remarks", speakers: ["Fuzhou America"] },
-    { type: "session", title: "AAPI Representation in Media & Literature", speakers: ["Yobe Qiu"] },
-    { type: "session", title: "Embracing Our Voice: Stories of Love & Resilience", speakers: ["Richard Lou", "Susan Kai Lin", "Lenny Zou", "Fanny Fang"] },
-    { type: "break", title: "LUNCHBREAK" },
-    { type: "session", title: "Generation FJ Live Performance", speakers: ["Chan Lin"] },
-    { type: "session", title: '"For Her" Short Film', speakers: ["Anna Lin"] },
-    { type: "break", title: "MINI HEALTH BREAK" },
-    { type: "session", title: "Reflections: Golden Venture 30th Year", speakers: ["Jimmy Zhang", "Diane Yeung"] },
-    { type: "session", title: "Memorializing East Broadway", speakers: ["Angela Li", "Chris Deng"] },
-    { type: "session", title: "Undocumented to Tech Executive", speakers: ["Ivy Teng Lei"] },
-    { type: "session", title: "Closing Remarks & Raffle Winners", speakers: ["Fuzhou America"] },
-    { type: "break", title: "NETWORKING" },
+    { type: "session", time: "10:30 AM", title: "Opening Remarks", speakers: ["Fuzhou America"] },
+    { type: "session", time: "10:45 AM", title: "AAPI Representation in Media & Literature", speakers: ["Yobe Qiu"] },
+    { type: "session", time: "11:30 AM", title: "Embracing Our Voice: Stories of Love & Resilience", speakers: ["Richard Lou", "Susan Kai Lin", "Lenny Zou", "Fanny Fang"] },
+    { type: "break", time: "12:30 PM", title: "Lunch Break" },
+    { type: "session", time: "1:30 PM", title: "Generation FJ Live Performance", speakers: ["Chan Lin"] },
+    { type: "session", time: "2:00 PM", title: '"For Her" Short Film', speakers: ["Anna Lin"] },
+    { type: "break", time: "2:30 PM", title: "Mini Health Break" },
+    { type: "session", time: "2:45 PM", title: "Reflections: Golden Venture 30th Year", speakers: ["Jimmy Zhang", "Diane Yeung"] },
+    { type: "session", time: "3:30 PM", title: "Memorializing East Broadway", speakers: ["Angela Li", "Chris Deng"] },
+    { type: "session", time: "4:15 PM", title: "Undocumented to Tech Executive", speakers: ["Ivy Teng Lei"] },
+    { type: "session", time: "4:45 PM", title: "Closing Remarks & Raffle Winners", speakers: ["Fuzhou America"] },
+    { type: "break", time: "5:00 PM", title: "Networking" },
   ];
 
   const sponsors = [
@@ -111,13 +107,21 @@ export default function Conference2023() {
               <p className="text-2xl sm:text-3xl font-serif italic mb-8">
                 Echoes from East Broadway
               </p>
+              <a
+                href="https://www.eventbrite.com/e/talk-too-much-echos-from-east-broadway-registration-670982415467"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block bg-white text-black px-8 py-3 rounded font-semibold hover:bg-gray-100 transition-colors"
+              >
+                Buy Tickets
+              </a>
             </div>
           </div>
         </div>
       </section>
 
       {/* Our Story Section */}
-      <section className="py-16 sm:py-24 bg-cream">
+      <section id="about" className="py-16 sm:py-24 bg-cream">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display text-foreground mb-8 text-center">
             OUR STORY
@@ -233,7 +237,7 @@ export default function Conference2023() {
       </section>
 
       {/* Our Community Chapters */}
-      <section className="py-16 sm:py-24 bg-[#f5f5f5]">
+      <section id="community" className="py-16 sm:py-24 bg-[#f5f5f5]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display text-foreground mb-8 text-center">
             Our Community
@@ -281,7 +285,7 @@ export default function Conference2023() {
       </section>
 
       {/* Speakers Section */}
-      <section className="py-16 sm:py-24 bg-cream">
+      <section id="speakers" className="py-16 sm:py-24 bg-cream">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display text-foreground mb-4 text-center">
             Speakers
@@ -355,43 +359,69 @@ export default function Conference2023() {
       </section>
 
       {/* Schedule Section */}
-      <section className="py-16 sm:py-24 bg-cream">
+      <section id="schedule" className="py-16 sm:py-24 bg-cream">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-[auto_1fr] gap-8 max-w-5xl mx-auto">
-            {/* Left side - dots decoration */}
-            <div className="hidden md:flex flex-col items-center gap-4 py-8">
-              {Array.from({ length: 20 }).map((_, i) => (
-                <div key={i} className="w-3 h-3 rounded-full bg-red-500" />
-              ))}
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-display text-primary mb-4 text-center">
+              Schedule
+            </h2>
+            <p className="text-center text-foreground/70 mb-8 text-lg">
+              MC: Fanny Fang & Diane Yeung
+            </p>
+
+            {/* Quick Overview Cards */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-12">
+              <div className="bg-white rounded-lg p-4 text-center shadow-sm">
+                <p className="text-sm text-foreground/60 uppercase tracking-wider">Registration</p>
+                <p className="text-lg font-semibold text-foreground">9:30 - 10:30 AM</p>
+              </div>
+              <div className="bg-primary text-white rounded-lg p-4 text-center shadow-sm">
+                <p className="text-sm uppercase tracking-wider opacity-80">Conference</p>
+                <p className="text-lg font-semibold">10:30 AM - 5:00 PM</p>
+              </div>
+              <div className="bg-white rounded-lg p-4 text-center shadow-sm">
+                <p className="text-sm text-foreground/60 uppercase tracking-wider">21+ Afterparty</p>
+                <p className="text-lg font-semibold text-foreground">9:00 PM</p>
+              </div>
             </div>
 
-            {/* Right side - schedule content */}
-            <div>
-              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-display text-red-500 mb-8">
-                Schedule
-              </h2>
+            {/* Timeline Schedule */}
+            <div className="relative">
+              {/* Timeline line */}
+              <div className="absolute left-[60px] sm:left-[80px] top-0 bottom-0 w-0.5 bg-primary/20 hidden sm:block" />
 
-              <div className="space-y-2 mb-8">
-                <p className="text-lg font-bold">REGISTRATION 9:30AM - 10:30AM</p>
-                <p className="text-lg font-bold">CONFERENCE TIME 10:30AM - 5:00PM</p>
-                <p className="text-lg font-bold">21+ AFTERPARTY 9:00PM</p>
-              </div>
+              <div className="space-y-4">
+                {schedule.map((item, index) => (
+                  <div key={index} className={`flex gap-4 sm:gap-6 ${item.type === 'break' ? '' : ''}`}>
+                    {/* Time */}
+                    <div className="w-[60px] sm:w-[80px] flex-shrink-0 text-right">
+                      <span className={`text-sm sm:text-base font-medium ${item.type === 'break' ? 'text-primary' : 'text-foreground/60'}`}>
+                        {item.time}
+                      </span>
+                    </div>
 
-              <p className="text-lg font-bold mb-8">MC: FANNY FANG & DIANE YEUNG</p>
+                    {/* Timeline dot */}
+                    <div className="hidden sm:flex flex-shrink-0 w-3 h-3 mt-1.5 rounded-full bg-primary relative z-10" />
 
-              <div className="space-y-6">
-                {schedule.filter(item => item.type === 'session' || item.type === 'break').map((item, index) => (
-                  <div key={index}>
-                    {item.type === 'break' ? (
-                      <p className="text-lg font-bold uppercase">{item.title}</p>
-                    ) : (
-                      <div>
-                        <p className="text-lg font-semibold">{item.title}</p>
-                        {item.speakers && (
-                          <p className="text-foreground/70">• {item.speakers.join(' • ')} •</p>
-                        )}
-                      </div>
-                    )}
+                    {/* Content */}
+                    <div className={`flex-1 pb-4 ${item.type === 'break' ? '' : ''}`}>
+                      {item.type === 'break' ? (
+                        <div className="bg-primary/10 rounded-lg px-4 py-2 inline-block">
+                          <p className="text-primary font-semibold uppercase tracking-wide text-sm">
+                            {item.title}
+                          </p>
+                        </div>
+                      ) : (
+                        <div className="bg-white rounded-lg p-4 shadow-sm">
+                          <h3 className="font-semibold text-foreground text-lg mb-1">{item.title}</h3>
+                          {item.speakers && (
+                            <p className="text-foreground/60 text-sm">
+                              {item.speakers.join(' · ')}
+                            </p>
+                          )}
+                        </div>
+                      )}
+                    </div>
                   </div>
                 ))}
               </div>
@@ -524,7 +554,7 @@ export default function Conference2023() {
       </section>
 
       {/* FAQs Section */}
-      <section className="py-16 sm:py-24 bg-[#f0f4f8]">
+      <section id="faqs" className="py-16 sm:py-24 bg-[#f0f4f8]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display text-foreground mb-12 text-center">
             FAQs

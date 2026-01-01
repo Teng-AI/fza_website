@@ -1,8 +1,10 @@
+import Image from "next/image";
+
 export default function SupportUs() {
   return (
     <>
       {/* Hero Section */}
-      <section className="bg-primary text-white py-20 sm:py-32">
+      <section className="mx-4 sm:mx-6 lg:mx-8 mt-4 bg-primary text-white py-16 sm:py-24 rounded-b-3xl">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl sm:text-5xl lg:text-7xl font-display mb-6">
             Support Us
@@ -47,6 +49,18 @@ export default function SupportUs() {
               </button>
             </form>
           </div>
+        </div>
+      </section>
+
+      {/* Community Image Section */}
+      <section className="w-full">
+        <div className="relative w-full h-[400px] sm:h-[500px] lg:h-[600px]">
+          <Image
+            src="/images/sections/community.jpg"
+            alt="Fuzhou America community gathering"
+            fill
+            className="object-cover"
+          />
         </div>
       </section>
     </>

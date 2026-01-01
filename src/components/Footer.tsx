@@ -15,7 +15,7 @@ export default function Footer() {
             rel="noopener noreferrer"
             className="inline-block bg-foreground text-white px-8 py-3 rounded font-semibold hover:bg-foreground/80 transition-colors uppercase tracking-wider text-sm"
           >
-            Subscribe
+            Start Now
           </a>
 
           {/* Social Icons */}

@@ -16,10 +16,10 @@ export default function Header() {
   }, [pathname]);
 
   const navLinks = [
-    { href: "/", label: "Home" },
-    { href: "/about", label: "About" },
-    { href: "/team", label: "Team" },
-    { href: "/support-us", label: "Support Us" },
+    { href: "/", label: "HOME" },
+    { href: "/about", label: "ABOUT" },
+    { href: "/team", label: "TEAM" },
+    { href: "/support-us", label: "SUPPORT US" },
   ];
 
   const conferenceLinks = [
@@ -47,7 +47,7 @@ export default function Header() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-foreground hover:text-primary transition-colors font-medium"
+                className="text-foreground hover:text-primary transition-colors font-medium tracking-wide text-sm"
               >
                 {link.label}
               </Link>
@@ -59,8 +59,8 @@ export default function Header() {
               onMouseEnter={() => setIsConferenceOpen(true)}
               onMouseLeave={() => setIsConferenceOpen(false)}
             >
-              <button className="text-foreground hover:text-primary transition-colors font-medium flex items-center gap-1">
-                Conference
+              <button className="text-foreground hover:text-primary transition-colors font-medium tracking-wide text-sm flex items-center gap-1">
+                CONFERENCE
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg>
@@ -96,18 +96,18 @@ export default function Header() {
 
             <Link
               href="/contact"
-              className="text-foreground hover:text-primary transition-colors font-medium"
+              className="text-foreground hover:text-primary transition-colors font-medium tracking-wide text-sm"
             >
-              Contact
+              CONTACT
             </Link>
 
             <a
               href="https://bit.ly/sitebuttons"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-primary text-white px-5 py-2 rounded hover:bg-primary-dark transition-colors font-medium"
+              className="bg-foreground text-white px-5 py-2 rounded hover:bg-foreground/80 transition-colors font-medium tracking-wide text-sm"
             >
-              Join our Community
+              JOIN OUR COMMUNITY
             </a>
           </div>
 
@@ -159,7 +159,7 @@ export default function Header() {
 
               {/* Mobile Conference Section */}
               <div className="py-2">
-                <span className="text-foreground font-medium">Conference</span>
+                <span className="text-foreground font-medium">CONFERENCE</span>
                 <div className="pl-4 mt-2 space-y-2">
                   {conferenceLinks.map((link) => (
                     link.external ? (
@@ -192,16 +192,16 @@ export default function Header() {
                 className="text-foreground hover:text-primary transition-colors font-medium py-2"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Contact
+                CONTACT
               </Link>
 
               <a
                 href="https://bit.ly/sitebuttons"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-primary text-white px-6 py-2 rounded hover:bg-primary-dark transition-colors font-medium text-center mt-2"
+                className="bg-foreground text-white px-6 py-2 rounded hover:bg-foreground/80 transition-colors font-medium text-center mt-2"
               >
-                Join our Community
+                JOIN OUR COMMUNITY
               </a>
             </div>
           </div>
