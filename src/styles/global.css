@@ -1,0 +1,397 @@
+/* FZA brand tokens, carried over from the Webflow build */
+:root {
+  --receipt: #f2f0e9;
+  --fza-red: #d23122;
+  --fortune-cookie: #fbddae;
+  --gold: #e2d567;
+  --zodiac: #ee5927;
+  --mahjong: #255c41;
+  --take-out-menu: #f5bed5;
+  --ink: #231f20;
+  --body: #1a1b1f;
+  --accent: #ee4a4d;
+  --grey: #6e6e6e;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  /* Variable font; one file covers all weights used on the site */
+  src: url('/fonts/montserrat-var.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Bebas Neue';
+  src: url('/fonts/bebas-neue-400.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Quentin';
+  src: url('/fonts/Quentin.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  color: var(--body);
+  font-size: 16px;
+  line-height: 1.7;
+  background: #fff;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  line-height: 1.2;
+  margin: 0 0 0.5em;
+}
+
+.container {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.section {
+  padding: 60px 0;
+}
+
+/* Labels above section headings ("What we believe in", "news", ...) */
+.label {
+  font-family: 'Bebas Neue', sans-serif;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--fza-red);
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.heading-jumbo {
+  font-family: 'Quentin', cursive;
+  font-size: clamp(38px, 6vw, 60px);
+  color: var(--receipt);
+  font-weight: 400;
+}
+
+.section-heading {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(30px, 4vw, 44px);
+  font-weight: 400;
+  letter-spacing: 1px;
+}
+
+/* Buttons */
+.button {
+  display: inline-block;
+  padding: 14px 30px;
+  background: var(--body);
+  color: #fff;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 13px;
+  font-weight: 600;
+  border: none;
+  border-radius: 0;
+  cursor: pointer;
+  transition: background-color 0.2s, opacity 0.2s;
+}
+.button:hover {
+  background: var(--fza-red);
+}
+.button.cc-light {
+  background: #fff;
+  color: var(--body);
+}
+.button.cc-light:hover {
+  background: var(--receipt);
+}
+
+/* Page heroes (solid FZA red, like the Webflow intro-header) */
+.intro-header {
+  background: var(--fza-red);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 480px;
+  margin-bottom: 60px;
+  text-align: center;
+}
+.intro-header.cc-subpage {
+  height: 240px;
+}
+
+/* Nav */
+.navigation {
+  background: #fff;
+  border-bottom: 1px solid #eee;
+}
+.navigation .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 14px;
+  padding-bottom: 14px;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.nav-logo img {
+  height: 56px;
+  width: auto;
+}
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  flex-wrap: wrap;
+}
+.nav-link {
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 12px;
+  letter-spacing: 2px;
+  font-weight: 600;
+  color: var(--body);
+  opacity: 0.75;
+  transition: opacity 0.2s;
+}
+.nav-link:hover,
+.nav-link[aria-current='page'] {
+  opacity: 1;
+  color: var(--fza-red);
+}
+.nav-dropdown {
+  position: relative;
+}
+.nav-dropdown > .nav-link {
+  cursor: default;
+}
+.nav-dropdown-list {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #fff;
+  border: 1px solid #eee;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  padding: 8px 0;
+  min-width: 120px;
+  z-index: 20;
+}
+.nav-dropdown:hover .nav-dropdown-list,
+.nav-dropdown:focus-within .nav-dropdown-list {
+  display: block;
+}
+.nav-dropdown-list a {
+  display: block;
+  padding: 8px 20px;
+  text-align: center;
+}
+
+/* CTA block ("Join Our Community") */
+.cta {
+  background: var(--receipt);
+  text-align: center;
+  padding: 80px 24px;
+}
+.cta h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(32px, 4vw, 44px);
+  font-weight: 400;
+  letter-spacing: 1px;
+}
+.cta p {
+  margin: 0 0 28px;
+}
+
+/* Footer */
+.footer {
+  background: var(--ink);
+  color: var(--receipt);
+  padding: 48px 0;
+}
+.footer .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.footer a {
+  color: var(--receipt);
+  text-decoration: none;
+}
+.footer a:hover {
+  color: var(--gold);
+}
+.footer-links {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  font-size: 14px;
+}
+.footer-logo img {
+  height: 48px;
+  width: auto;
+}
+.footer-note {
+  font-size: 12px;
+  opacity: 0.7;
+  width: 100%;
+}
+
+/* Feature rows on the homepage */
+.feature-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+  margin-bottom: 60px;
+}
+.feature-row img {
+  width: 100%;
+  object-fit: cover;
+  aspect-ratio: 4 / 3;
+}
+@media (max-width: 760px) {
+  .feature-row {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+/* People / card grids */
+.people-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 36px 28px;
+  margin-top: 36px;
+}
+.person-card {
+  text-align: center;
+}
+.person-card img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  margin-bottom: 14px;
+}
+.person-card h3 {
+  font-size: 18px;
+  margin-bottom: 2px;
+}
+.person-card .pronouns {
+  color: var(--grey);
+  font-size: 13px;
+  margin: 0;
+}
+.person-card p {
+  margin: 4px 0 0;
+  font-size: 14px;
+}
+.person-card a {
+  text-decoration: none;
+}
+.person-card a:hover h3 {
+  color: var(--fza-red);
+}
+
+/* Photo galleries */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 12px;
+  margin-top: 32px;
+}
+.gallery img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+/* Stats grid (about page) */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 36px 24px;
+  text-align: center;
+  margin-top: 40px;
+}
+.stat-number {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 52px;
+  color: var(--accent);
+  line-height: 1;
+}
+.stat-caption {
+  font-size: 14px;
+  margin-top: 8px;
+}
+
+/* Responsive video embeds */
+.video-embed {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  margin: 32px 0;
+}
+.video-embed iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* FAQ */
+.faq-item {
+  border-bottom: 1px solid #e6e6e6;
+  padding: 4px 0;
+}
+.faq-item summary {
+  cursor: pointer;
+  font-weight: 600;
+  padding: 14px 0;
+  list-style-position: outside;
+}
+.faq-item .faq-answer {
+  padding: 0 0 16px;
+}
+
+/* Forms */
+.form-field {
+  display: block;
+  width: 100%;
+  padding: 12px 14px;
+  margin-bottom: 16px;
+  border: 1px solid #d5d5d5;
+  font-family: inherit;
+  font-size: 15px;
+}
+textarea.form-field {
+  min-height: 140px;
+  resize: vertical;
+}

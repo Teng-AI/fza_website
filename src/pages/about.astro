@@ -1,0 +1,86 @@
+---
+import Base from '../layouts/Base.astro';
+import Cta from '../components/Cta.astro';
+
+const stats = [
+  { number: '8000+', caption: 'Active online members' },
+  { number: '100+', caption: 'Cities represented in our community' },
+  { number: '58%', caption: 'Females' },
+  { number: '93%', caption: 'Ages 18-34' },
+  { number: '1000+', caption: 'People gathered through events' },
+  { number: '25+', caption: 'Countries represented in our community' },
+];
+---
+
+<Base title="About | Fuzhou, America" current="about">
+  <header class="intro-header cc-subpage">
+    <h1 class="heading-jumbo">About Us</h1>
+  </header>
+
+  <section class="section">
+    <div class="container" style="text-align: center;">
+      <h2 class="section-heading" set:html={'We are the primary organization dedicated to f&#111;stering Fuzhou American history, culture, and community.'} />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="feature-row">
+        <div>
+          <h2 class="section-heading">Our Mission: Why We Exist</h2>
+          <p>
+            You know how the story goes: someone in your family &mdash; likely your father/mother, uncle/aunt, or
+            grandfather/grandmother &mdash; crossed the Atlantic by boat. Then, they opened a take-out restaurant in a
+            corner of this country. From the rural villages back in Fuzhou, they succeeded in carving out a space in
+            America.
+          </p>
+          <p>But with success came sacrifice.</p>
+          <p set:html={'N&#111;t only did our parents give up their personal freedoms, but many of us also grew up in socially disconnected environments, stranded between assimilating into American life and helping out at the family restaurant.'} />
+          <p>
+            We lacked a community that fully understood our struggles with family relations, social dynamics, and
+            personal identity. Fuzhou America (FZA) is that safe space.
+          </p>
+          <p>Here, at FZA, the next generation find peers who think like us, sound like us, and feel like us.</p>
+        </div>
+        <img src="/images/about/mission.jpg" alt="Fuzhou America community gathering" loading="lazy" />
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="section-heading">Our Vision: What We're Building</h2>
+      <ul>
+        <li>We have core programs serving high schoolers, college students, and young professionals.</li>
+        <li>We have an extensive library of content and resources promoting our history and culture.</li>
+        <li>
+          We have a motivated leadership team, seasoned veterans willing to devote time and resources, and promising
+          members ready to carry our organization forward.
+        </li>
+        <li>We have organizational infrastructure promoting sustainability built upon institutional knowledge.</li>
+        <li>
+          We have strong external credibility and presence established through community involvement, partnerships,
+          and narrative sharing.
+        </li>
+        <li>We are the primary organization for first-generation Fuzhounese people across the world.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container" style="text-align: center;">
+      <div class="label">Our Progress</div>
+      <h2 class="section-heading">What We've Accomplished</h2>
+      <div class="stats-grid">
+        {stats.map((s) => (
+          <div>
+            <div class="stat-number">{s.number}</div>
+            <div class="stat-caption">{s.caption}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Cta />
+</Base>

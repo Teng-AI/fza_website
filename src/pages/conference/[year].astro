@@ -1,0 +1,380 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Cta from '../../components/Cta.astro';
+
+export async function getStaticPaths() {
+  const conferences = await getCollection('conferences');
+  return conferences.map((entry) => ({
+    params: { year: String(entry.data.year) },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const c = entry.data;
+const { Content } = await render(entry);
+const pageTitle = `${c.name}: ${c.theme} | Fuzhou, America`;
+---
+
+<Base title={pageTitle} description={`${c.name} ${c.year}: ${c.theme}, the Fuzhou America annual conference.`}>
+  <header class="conf-hero" style={c.heroImage ? `background-image: url('${c.heroImage}')` : ''}>
+    <div class="conf-hero-inner">
+      <p class="conf-hero-meta">
+        <span>{c.dateDisplay}</span>
+        <span>{c.venueShort}</span>
+      </p>
+      <p class="conf-presenter">{c.presenterLine}</p>
+      <h1>
+        {c.name}
+        <span class="conf-theme">{c.theme}</span>
+      </h1>
+      {c.pastEventNote && <p class="past-note">{c.pastEventNote}</p>}
+      {c.ticketUrl && <a href={c.ticketUrl} class="button cc-light">Buy Tickets</a>}
+    </div>
+  </header>
+
+  <section class="section" id="about">
+    <div class="container">
+      <h2 class="section-heading">OUR STORY</h2>
+      <div class="conf-story">
+        <Content />
+      </div>
+    </div>
+  </section>
+
+  {c.whyAttend && (
+    <section class="section conf-why" id="why-attend">
+      <div class="container">
+        <h2 class="section-heading">WHY ATTEND</h2>
+        <p>{c.whyAttend.intro}</p>
+        <div class="why-grid">
+          {c.whyAttend.cards.map((card) => (
+            <div class="why-card">
+              {card.image && <img src={card.image} alt={card.title} loading="lazy" />}
+              <h3>{card.title}</h3>
+              <p set:html={card.text} />
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  {c.recap && (
+    <section class="section">
+      <div class="container">
+        <h2 class="section-heading">{c.recap.title}</h2>
+        {c.recap.videoId && (
+          <div class="video-embed">
+            <iframe
+              src={`https://www.youtube.com/embed/${c.recap.videoId}`}
+              title={c.recap.title}
+              loading="lazy"
+              allowfullscreen
+            />
+          </div>
+        )}
+        {c.recap.photos.length > 0 && (
+          <div class="gallery">
+            {c.recap.photos.map((p) => (
+              <img src={p} alt={`${c.recap.title} photo`} loading="lazy" />
+            ))}
+          </div>
+        )}
+      </div>
+    </section>
+  )}
+
+  {c.community && (
+    <section class="section" id="community">
+      <div class="container">
+        <h2 class="section-heading">Our Community</h2>
+        <p>{c.community.text}</p>
+        {c.community.photos.length > 0 && (
+          <div class="gallery">
+            {c.community.photos.map((p) => (
+              <img src={p} alt="Fuzhou America community" loading="lazy" />
+            ))}
+          </div>
+        )}
+        {c.community.videoIds.map((id) => (
+          <div class="video-embed">
+            <iframe src={`https://www.youtube.com/embed/${id}`} title="Fuzhou America video" loading="lazy" allowfullscreen />
+          </div>
+        ))}
+      </div>
+    </section>
+  )}
+
+  {(c.scheduleImage || c.agenda) && (
+    <section class="section" id="schedule">
+      <div class="container">
+        <h2 class="section-heading">Schedule</h2>
+        {c.agenda && (
+          <div class="agenda">
+            <p class="agenda-when">
+              <strong>{c.agenda.date}</strong><br />
+              {c.agenda.time}
+            </p>
+            <ul class="agenda-list">
+              {c.agenda.items.map((item) => (
+                <li>
+                  <strong>{item.title}</strong>
+                  <span>{item.who}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+        {c.scheduleImage && <img src={c.scheduleImage} alt={`${c.name} ${c.year} schedule`} loading="lazy" />}
+      </div>
+    </section>
+  )}
+
+  {c.speakers && (
+    <section class="section" id="speakers">
+      <div class="container">
+        <h2 class="section-heading">Speakers</h2>
+        {c.speakers.intro && <p>{c.speakers.intro}</p>}
+        <div class="people-grid">
+          {c.speakers.people.map((p) => (
+            <div class="person-card">
+              {p.link ? (
+                <a href={p.link}>
+                  {p.image && <img src={p.image} alt={p.name} loading="lazy" />}
+                  <h3>{p.name}</h3>
+                </a>
+              ) : (
+                <>
+                  {p.image && <img src={p.image} alt={p.name} loading="lazy" />}
+                  <h3>{p.name}</h3>
+                </>
+              )}
+              {p.pronouns && <p class="pronouns">{p.pronouns}</p>}
+              {p.lines.map((line) => (
+                <p>{line}</p>
+              ))}
+            </div>
+          ))}
+        </div>
+        {c.speakers.note && <p class="speakers-note">{c.speakers.note}</p>}
+      </div>
+    </section>
+  )}
+
+  {c.mcs && (
+    <section class="section">
+      <div class="container">
+        <h2 class="section-heading">MCs</h2>
+        {c.mcs.intro && <p>{c.mcs.intro}</p>}
+        <div class="people-grid">
+          {c.mcs.people.map((p) => (
+            <div class="person-card">
+              {p.link ? (
+                <a href={p.link}>
+                  {p.image && <img src={p.image} alt={p.name} loading="lazy" />}
+                  <h3>{p.name}</h3>
+                </a>
+              ) : (
+                <>
+                  {p.image && <img src={p.image} alt={p.name} loading="lazy" />}
+                  <h3>{p.name}</h3>
+                </>
+              )}
+              {p.pronouns && <p class="pronouns">{p.pronouns}</p>}
+              {p.lines.map((line) => (
+                <p>{line}</p>
+              ))}
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  {c.conferenceTeam && (
+    <section class="section">
+      <div class="container">
+        <h2 class="section-heading">Conference Team</h2>
+        {c.conferenceTeam.intro && <p>{c.conferenceTeam.intro}</p>}
+        <div class="people-grid">
+          {c.conferenceTeam.people.map((p) => (
+            <div class="person-card">
+              {p.link ? (
+                <a href={p.link}>
+                  {p.image && <img src={p.image} alt={p.name} loading="lazy" />}
+                  <h3>{p.name}</h3>
+                </a>
+              ) : (
+                <>
+                  {p.image && <img src={p.image} alt={p.name} loading="lazy" />}
+                  <h3>{p.name}</h3>
+                </>
+              )}
+              {p.pronouns && <p class="pronouns">{p.pronouns}</p>}
+              {p.lines.map((line) => (
+                <p>{line}</p>
+              ))}
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  {c.venue && (
+    <section class="section">
+      <div class="container">
+        <h2 class="section-heading">The Venue</h2>
+        <p set:html={c.venue.text} />
+        {c.venue.links.length > 0 && (
+          <p>
+            {c.venue.links.map((l, i) => (
+              <>
+                {i > 0 && ' · '}
+                <a href={l.url}>{l.label}</a>
+              </>
+            ))}
+          </p>
+        )}
+        {c.venue.image && <img src={c.venue.image} alt={`${c.name} venue`} loading="lazy" />}
+      </div>
+    </section>
+  )}
+
+  {c.sponsorsImage && (
+    <section class="section">
+      <div class="container">
+        <h2 class="section-heading">Past Sponsors</h2>
+        <img src={c.sponsorsImage} alt={`${c.name} ${c.year} sponsors`} loading="lazy" />
+        {c.sponsorsNote && <p set:html={c.sponsorsNote} />}
+      </div>
+    </section>
+  )}
+
+  {c.faqs.length > 0 && (
+    <section class="section" id="faqs">
+      <div class="container">
+        <h2 class="section-heading">FAQs</h2>
+        {c.faqs.map((f) => (
+          <details class="faq-item">
+            <summary>{f.q}</summary>
+            <div class="faq-answer" set:html={f.a} />
+          </details>
+        ))}
+      </div>
+    </section>
+  )}
+
+  <Cta />
+</Base>
+
+<style>
+  .conf-hero {
+    background-color: var(--ink);
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+    padding: 120px 24px;
+    text-align: center;
+    position: relative;
+  }
+  .conf-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+  }
+  .conf-hero-inner {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .conf-hero-meta {
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-size: 18px;
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+  }
+  .conf-presenter {
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 13px;
+    opacity: 0.85;
+  }
+  .conf-hero h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-weight: 400;
+    font-size: clamp(48px, 8vw, 88px);
+    letter-spacing: 2px;
+    margin: 12px 0 20px;
+  }
+  .conf-theme {
+    display: block;
+    font-size: clamp(24px, 4vw, 40px);
+    color: var(--fortune-cookie);
+  }
+  .past-note {
+    display: inline-block;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    padding: 10px 24px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 13px;
+  }
+  .conf-story :global(p) {
+    max-width: 760px;
+  }
+  .conf-why p {
+    max-width: 760px;
+  }
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 32px;
+    margin-top: 32px;
+  }
+  .why-card img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    margin-bottom: 16px;
+  }
+  .why-card h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-weight: 400;
+    letter-spacing: 2px;
+    font-size: 26px;
+    color: var(--fza-red);
+  }
+  .agenda-when {
+    font-size: 18px;
+  }
+  .agenda-list {
+    list-style: none;
+    padding: 0;
+    max-width: 640px;
+  }
+  .agenda-list li {
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 12px 0;
+    border-bottom: 1px solid #e6e6e6;
+  }
+  .agenda-list li span {
+    text-align: right;
+    color: var(--grey);
+  }
+  .speakers-note {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 24px;
+    letter-spacing: 1px;
+    text-align: center;
+    margin-top: 40px;
+  }
+</style>

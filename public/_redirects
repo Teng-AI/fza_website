@@ -1,0 +1,4 @@
+# Cloudflare Pages server-side redirects for the old Webflow conference URLs.
+# astro.config.mjs also emits meta-refresh fallback pages for other hosts.
+/talktoomuch2024 /conference/2024 301
+/talktoomuch2023 /conference/2023 301
