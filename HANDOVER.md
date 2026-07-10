@@ -1,37 +1,21 @@
-# HANDOVER
+# Handover
 
-## Goal
-Migrate fuzhouamerica.org from Webflow to a self-owned Astro static site. Migration is COMPLETE and live at https://fza-website.pages.dev (Cloudflare Pages, auto-deploys from main on github.com/Teng-AI/fza_website). Only the DNS cutover to fuzhouamerica.org remains.
+**Goal**: fuzhouamerica.org migration off Webflow. Site migration, DNS cutover, and repo audit are DONE; registrar transfers are mid-flight.
 
-## Done (this session)
-- Full Webflow-to-Astro migration: 8 pages + 404, content collections (team/media/conferences), all assets local, verified zero Webflow CDN refs
-- Deployed to Cloudflare Pages; old Vercel project fza_website deleted (was sending failed-build emails)
-- Contact form wired to Formspree xeebyoyo (tested end to end)
-- Footer consolidated: Join Our Community message + beehiiv subscribe embed (form ID e2fb6eff-997e-49e0-9395-dae1bed1cd85 in src/components/Footer.astro) + social icon circles; separate CTA section removed
-- beehiiv welcome email written and activated by user
-- Brand: no-comma "Fuzhou America" logos (public/images/brand/ kit), header/footer/favicon swapped, titles updated
-- Nav: CSS-only hamburger on mobile; "Follow Our Journey" button links to Instagram
-- SEO: og/twitter cards with og-image.png, canonical URLs, NonprofitOrganization JSON-LD, @astrojs/sitemap, robots.txt
-- Typography pass: 68ch measure, 14px labels, 80px sections, 17px body
-- Content edits: Richard Lou replaced Jacky Chen (advisory), captions updated, contact page trimmed to email only, dead links delinked (chanlinart.com, yidagao LinkedIn)
-- Final audit: 26/26 live checks, 105/105 images, all links verified
+**Status**:
+- LIVE: fuzhouamerica.org + www serve the Astro site from Cloudflare Pages (project fza-website, auto-deploys from main). 27/27 live checks passed.
+- LIVE: fuzhouamerica.com 301-redirects every path to www.fuzhouamerica.org (Cloudflare redirect rule "com to org" + proxied AAAA 100:: records + Always Use HTTPS).
+- Email intact on both domains (Google Workspace: 5 MX, SPF, DKIM each). Never delete those records.
+- Repo audited: skills rewritten for Astro, work-logs untracked, unused logo removed, migration source zipped to migration-source.zip (569M, gitignored) and the raw folders deleted.
+- IN FLIGHT: registrar transfers Squarespace -> Cloudflare. Both domains unlocked at the registry; waiting on auth-code emails to info@fuzhouamerica.org (up to 24h; do NOT re-request, it invalidates the code in flight).
 
-## In progress
-- Nothing mid-flight. Working tree clean, all pushed.
+**Decisions made**:
+- .org DNS records are CNAME to fza-website.pages.dev set to DNS only (grey cloud): Webflow's Cloudflare-for-SaaS hostname claim hijacked proxied traffic. Claim should expire soon; can retry Proxied.
+- .com redirects at the DNS/edge layer instead of being a second Pages domain (preserves SEO, one canonical site).
 
-## Open decisions
-- DNS cutover timing (user's call; steps below)
-- beehiiv embed still shows on a white card; user can set background transparent in beehiiv Style tab (no code change)
-- Optional post-cutover: Google Search Console verification + submit sitemap
+**What to avoid**:
+- Clicking "Update domain" inside Webflow (re-binds its hostname claim).
+- Purging cache to fix Webflow-content-after-cutover; the cache was Webflow's, the fix was removing custom domains in Webflow.
 
-## File map
-- src/content/{team,media,conferences}/ - all editable content, one md file per item
-- src/components/Footer.astro - beehiiv form ID at top
-- src/pages/contact.astro - Formspree endpoint const
-- scripts/verify.mjs - post-build link/asset checker (npm run verify)
-- public/images/brand/ - logo kit; public/og-image.png - social share image
-- plans/completed/webflow-astro-migration/ - migration research + decisions
-- Memory: ~/.claude/projects/-Users-Teng-Documents-claude-fza-website/memory/fza-deployment.md
-
-## Next step
-DNS cutover DONE 2026-07-10: fuzhouamerica.org + www live on Cloudflare Pages, 27/27 live checks pass, email records intact. Both CNAMEs are DNS-only (grey cloud) as a workaround: Webflow's Cloudflare-for-SaaS hostname claim took routing precedence when proxied. In a day or so, flip both CNAMEs back to Proxied and verify the new site still serves (if Webflow content returns, the claim hasn't expired; revert to DNS-only). Remaining: user cancels Webflow subscription; optional: DMARC record, migrate fuzhouamerica.com (redirect to .org), transfer both registrations Squarespace -> Cloudflare Registrar, Google Search Console + sitemap submission.
+**Next step**:
+- When the two auth codes arrive at info@fuzhouamerica.org: Cloudflare -> Domain Registration -> Transfer Domains, paste codes, pay (~$11 each, adds a year), then approve Squarespace's transfer-out confirmation email. Then verify: whois registrar = Cloudflare, expiry 2028, site + email checks still green. Same visit: flip the two .org CNAMEs back to Proxied and verify the new site still serves. After all green: user cancels the Webflow subscription.

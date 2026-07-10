@@ -12,3 +12,19 @@
 **Source:** fuzhouamerica.org cutover debugging; purge-cache had no effect because the cache was in Webflow's zone, not ours.
 **Applies to:** any migration off Webflow (or any Cloudflare-for-SaaS platform) onto Cloudflare-proxied hosting.
 **Scope:** global
+
+## [2026-07-10] Squarespace transfer codes are email-only and go to the registrant contact
+
+**Type:** domain
+**Insight:** Squarespace never displays domain transfer auth codes in the dashboard. They email them (up to 24h) to the domain's registrant contact, which can differ from the account login email. Requesting a new code invalidates the previous one, so clicking again restarts the wait.
+**Source:** fuzhouamerica.org/.com transfer-out, verified against Squarespace support docs.
+**Applies to:** any domain transfer away from Squarespace.
+**Scope:** global
+
+## [2026-07-10] Diagnosing "DNS change not working" from one machine
+
+**Type:** pattern
+**Context:** After the cutover, the site looked broken locally while fine globally.
+**What works:** Compare three views: authoritative (`dig @<ns>`), public resolver (`dig @1.1.1.1`), and the local resolver (`dig` bare, check remaining TTL in the answer). Then test serving with `curl --resolve host:443:<fresh-ip>` to bypass cache entirely. If authoritative and 1.1.1.1 agree, the change is live; the local view is just router cache with a visible TTL countdown.
+**Reuse:** any DNS migration where "it doesn't work for me" needs to be split into global vs local.
+**Scope:** global

@@ -83,6 +83,8 @@ The footer embeds a beehiiv subscribe form (form ID set in `src/components/Foote
 
 ## Deploy on Cloudflare Pages
 
+Production is already set up: the Pages project `fza-website` auto-deploys every push to `main`, and both `fuzhouamerica.org` and `www.fuzhouamerica.org` are attached as custom domains (DNS also lives in the same Cloudflare account; `fuzhouamerica.com` redirects there). The steps below are only needed to recreate the setup from scratch.
+
 1. Push this repo to GitHub.
 2. In the Cloudflare dashboard: **Workers & Pages → Create → Pages → Connect to Git**, pick the repo.
 3. Build settings:
