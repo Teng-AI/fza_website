@@ -336,22 +336,6 @@ h4 {
   }
 }
 
-/* CTA block ("Join Our Community") */
-.cta {
-  background: var(--receipt);
-  text-align: center;
-  padding: 80px 24px;
-}
-.cta h2 {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(32px, 4vw, 44px);
-  font-weight: 400;
-  letter-spacing: 1px;
-}
-.cta p {
-  margin: 0 0 28px;
-}
-
 /* Footer (carries the Join Our Community message; no separate CTA section) */
 .footer {
   background: var(--ink);
