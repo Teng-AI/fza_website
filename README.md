@@ -79,7 +79,7 @@ The contact page form posts to Formspree (form ID `xeebyoyo`, set in `src/pages/
 
 ## Newsletter signup
 
-The footer embeds a beehiiv subscribe form (form ID set in `src/components/Footer.astro`). Edit the form's text and colors in the beehiiv dashboard under **Grow → Subscribe Forms** — no code change needed. If the form is ever deleted, clear `BEEHIIV_FORM_ID` in `Footer.astro` and the footer falls back to a Subscribe button linking to the hosted signup page. Visitors with JavaScript disabled always get that fallback button.
+The footer embeds a beehiiv subscribe form (form ID set in `src/components/Footer.astro`). Edit the form's text and colors in the beehiiv dashboard under **Grow → Subscribe Forms**; no code change needed. If the form is ever deleted, clear `BEEHIIV_FORM_ID` in `Footer.astro` and the footer falls back to a Subscribe button linking to the hosted signup page. Visitors with JavaScript disabled always get that fallback button.
 
 ## Deploy on Cloudflare Pages
 
