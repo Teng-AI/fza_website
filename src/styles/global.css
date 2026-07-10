@@ -326,18 +326,11 @@ h4 {
   margin: 0 0 28px;
 }
 
-/* Footer */
+/* Footer (carries the Join Our Community message; no separate CTA section) */
 .footer {
   background: var(--ink);
   color: var(--receipt);
-  padding: 48px 0;
-}
-.footer .container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 24px;
-  flex-wrap: wrap;
+  padding: 56px 0 28px;
 }
 .footer a {
   color: var(--receipt);
@@ -346,20 +339,75 @@ h4 {
 .footer a:hover {
   color: var(--gold);
 }
+.footer-cta {
+  text-align: center;
+}
+.footer-cta h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-weight: 400;
+  font-size: clamp(30px, 4vw, 42px);
+  letter-spacing: 1px;
+  margin-bottom: 6px;
+}
+.footer-cta > p {
+  margin: 0 0 26px;
+  opacity: 0.85;
+}
+.button.cc-subscribe {
+  background: var(--fza-red);
+}
+.button.cc-subscribe:hover {
+  background: var(--zodiac);
+}
+.newsletter-embed {
+  display: block;
+  width: 100%;
+  max-width: 460px;
+  height: 56px;
+  border: 0;
+  margin: 0 auto;
+}
+.footer-socials {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 28px;
+}
+.footer-socials a {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--receipt);
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+}
+.footer-socials a:hover {
+  background: var(--gold);
+  color: var(--ink);
+}
+.footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  border-top: 1px solid rgba(242, 240, 233, 0.2);
+  margin-top: 36px;
+  padding-top: 20px;
+}
 .footer-links {
   display: flex;
   gap: 24px;
   flex-wrap: wrap;
   font-size: 14px;
 }
-.footer-logo img {
-  height: 48px;
-  width: auto;
-}
 .footer-note {
   font-size: 12px;
   opacity: 0.7;
-  width: 100%;
+  margin: 0;
 }
 
 /* Feature rows on the homepage */

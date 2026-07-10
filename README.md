@@ -77,6 +77,10 @@ order: 7                # position in the list on the homepage
 
 The contact page form posts to Formspree (form ID `xeebyoyo`, set in `src/pages/contact.astro`). Manage submissions and notification emails at [formspree.io](https://formspree.io). After a visitor submits, Formspree shows its hosted thank-you page and returns them to the site.
 
+## Newsletter signup (TODO: beehiiv embed)
+
+The footer's Subscribe button currently links out to the hosted beehiiv page. To let visitors subscribe without leaving the site: in the beehiiv dashboard go to **Grow → Subscribe Forms → Embed**, copy the iframe URL (`https://embeds.beehiiv.com/...`), and paste it into `BEEHIIV_EMBED_URL` at the top of `src/components/Footer.astro`. The embedded form appears automatically.
+
 ## Deploy on Cloudflare Pages
 
 1. Push this repo to GitHub.

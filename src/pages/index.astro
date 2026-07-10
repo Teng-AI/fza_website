@@ -1,7 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
-import Cta from '../components/Cta.astro';
 
 const media = (await getCollection('media')).sort((a, b) => a.data.order - b.data.order);
 ---
@@ -65,7 +64,6 @@ const media = (await getCollection('media')).sort((a, b) => a.data.order - b.dat
     </div>
   </section>
 
-  <Cta />
 </Base>
 
 <style>
