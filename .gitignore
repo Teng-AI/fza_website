@@ -24,3 +24,4 @@ webflow_export/
 # old framework leftovers
 .next/
 .vercel/
+.playwright-mcp/
