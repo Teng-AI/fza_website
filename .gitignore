@@ -25,3 +25,4 @@ webflow_export/
 .next/
 .vercel/
 .playwright-mcp/
+.claude/compaction-archives/
