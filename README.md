@@ -73,12 +73,9 @@ order: 7                # position in the list on the homepage
 ---
 ```
 
-## Contact form (TODO)
+## Contact form
 
-The contact page form posts to a **Formspree placeholder** and does not deliver messages yet:
-
-1. Create a free form at [formspree.io](https://formspree.io) (point it at info@fuzhouamerica.org).
-2. In `src/pages/contact.astro`, replace `YOUR_FORM_ID` in the `FORMSPREE_ENDPOINT` line with the ID Formspree gives you.
+The contact page form posts to Formspree (form ID `xeebyoyo`, set in `src/pages/contact.astro`). Manage submissions and notification emails at [formspree.io](https://formspree.io). After a visitor submits, Formspree shows its hosted thank-you page and returns them to the site.
 
 ## Deploy on Cloudflare Pages
 
