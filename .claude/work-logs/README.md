@@ -35,8 +35,14 @@ Each session log follows a standard format:
 
 ## Recent Sessions
 
+### January 2026
+
+- **[2026-01-03 Session 01](2026-01/2026-01-03_session-01.md)** - FZA Website Design Improvements & Membership System Planning
+- **[2026-01-01 Session 01](2026-01/2026-01-01_session-01.md)** - FZA Website Styling Update & Production Deployment
+
 ### December 2025
 
+- **[2025-12-31 Session 02](2025-12/2025-12-31_session-02.md)** - Phase 1 Bug Fixes & GitHub Repository Setup
 - **[2025-12-31 Session 01](2025-12/2025-12-31_session-01.md)** - Conference 2023 Page Implementation: Asset Download & YouTube Embed Fixes
 
 ## Navigation Tips
@@ -57,4 +63,4 @@ When creating new session logs:
 
 ---
 
-**Last Updated**: 2025-12-31
+**Last Updated**: 2026-01-03
