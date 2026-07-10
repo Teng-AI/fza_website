@@ -103,6 +103,7 @@ src/
   styles/global.css   # brand colors, fonts, shared styles
 public/
   images/             # all site images, organized by section
+  images/brand/       # logo kit: full / mark / stacked, each in color / black / white
   fonts/              # self-hosted fonts (Montserrat, Bebas Neue, Quentin)
   _redirects          # Cloudflare Pages redirects
 scripts/verify.mjs    # post-build link/asset checker
