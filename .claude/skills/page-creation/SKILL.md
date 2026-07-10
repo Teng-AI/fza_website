@@ -7,146 +7,41 @@ description: Create new pages for the FZA website following existing patterns. U
 
 ## Overview
 
-This skill creates new pages for the Fuzhou America website that match the existing design and structure.
+This site is Astro with static output. Every `.astro` file under `src/pages/` becomes a route: `src/pages/about.astro` serves `/about`. There is no client-side JavaScript; keep it that way unless the user explicitly asks (current exceptions: the beehiiv embed script and YouTube iframes).
 
-## How Pages Work in Next.js
+## Special case: a new conference year is NOT a new page
 
-This site uses Next.js App Router:
-- Each folder in `src/app/` becomes a URL route
-- The `page.tsx` file in each folder is the page content
-- Example: `src/app/events/page.tsx` = website.com/events
+Adding `/conference/2027` means creating one markdown file, `src/content/conferences/2027.md`. The dynamic route `src/pages/conference/[year].astro` renders it and the nav dropdown picks it up automatically. Copy `2024.md` as the fullest template; every section in the schema (`src/content.config.ts`) is optional.
 
-## Existing Page Patterns
+## Creating a genuinely new page
 
-### Standard Page Structure
+1. Copy the structure of the closest existing page (`about.astro` is a good general-purpose example).
+2. Standard skeleton:
 
-All pages follow this pattern:
+```astro
+---
+import Base from '../layouts/Base.astro';
+---
 
-```tsx
-export default function PageName() {
-  return (
-    <>
-      {/* Hero Section - Primary color background */}
-      <section className="bg-primary text-white py-20 sm:py-32">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl sm:text-5xl lg:text-7xl font-display mb-6">
-            Page Title
-          </h1>
-          <p className="text-xl sm:text-2xl max-w-3xl mx-auto">
-            Subtitle or description
-          </p>
-        </div>
-      </section>
-
-      {/* Content Sections - Alternate between bg-cream and bg-white */}
-      <section className="py-16 sm:py-24 bg-cream">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Content here */}
-        </div>
-      </section>
-    </>
-  );
-}
-```
-
-### Design System
-
-**Colors** (use these class names):
-- `bg-primary` / `text-primary` - Brand red color
-- `bg-cream` - Off-white background
-- `bg-white` - Pure white background
-- `text-foreground` - Dark text
-- `text-foreground/80` - Slightly lighter text
-
-**Typography**:
-- `font-display` - Bebas Neue (headings, all caps)
-- `font-serif italic` - Playfair Display (elegant headings)
-- Default font is Montserrat
-
-**Common Patterns**:
-- Two-column grid: `grid md:grid-cols-2 gap-8 lg:gap-16 items-center`
-- Stats grid: `grid grid-cols-2 lg:grid-cols-3 gap-8`
-- Max width container: `max-w-7xl mx-auto px-4 sm:px-6 lg:px-8`
-
-### Section Types
-
-**Hero Section** (always first):
-```tsx
-<section className="bg-primary text-white py-20 sm:py-32">
-```
-
-**Text + Image Section**:
-```tsx
-<section className="py-16 sm:py-20 bg-cream">
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div className="grid md:grid-cols-2 gap-8 lg:gap-16 items-center">
-      <div>{/* Text content */}</div>
-      <div>{/* Image */}</div>
+<Base title="Page Name" description="One-sentence description for search and social." current="page-slug">
+  <section class="section">
+    <div class="container">
+      <span class="label">SECTION LABEL</span>
+      <h2>Heading</h2>
+      <p>Body copy.</p>
     </div>
-  </div>
-</section>
+  </section>
+</Base>
 ```
 
-**Stats Section**:
-```tsx
-<section className="py-16 sm:py-24 bg-cream">
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div className="grid grid-cols-2 lg:grid-cols-3 gap-8">
-      {stats.map((stat) => (
-        <div key={stat.label} className="text-center">
-          <div className="text-4xl font-display text-primary">{stat.number}</div>
-          <div className="text-foreground/70">{stat.label}</div>
-        </div>
-      ))}
-    </div>
-  </div>
-</section>
+3. `Base.astro` provides nav, footer, and all SEO tags. The `current` prop highlights the active nav link; add a nav entry in `src/components/Nav.astro` only if the page belongs in the main navigation.
+4. Reuse classes from `src/styles/global.css` (`.section`, `.container`, `.label`, `.button`, `.feature-row`, card grids). Brand colors are CSS custom properties at the top of that file (`--fza-red`, `--receipt`, `--ink`, `--gold`). Add new CSS at the bottom of global.css, scoped with a page-specific class prefix.
+5. Images go in `public/images/` and are referenced as `/images/...`.
+
+## Verify before finishing
+
+```bash
+npm run build && npm run verify
 ```
 
-## Instructions
-
-### Creating a New Page
-
-1. **Create the folder**: `src/app/[page-name]/`
-2. **Create the file**: `src/app/[page-name]/page.tsx`
-3. **Use the standard structure** from patterns above
-4. **Add to navigation** if needed (edit `src/components/Header.tsx`)
-5. **Test the page** with `npm run dev`
-
-### Creating a Nested Page (e.g., /conference/2025)
-
-1. **Create the folder**: `src/app/conference/2025/`
-2. **Create the file**: `src/app/conference/2025/page.tsx`
-3. **Update conference dropdown** in `src/components/Header.tsx`:
-   ```tsx
-   const conferenceLinks = [
-     { href: "/conference/2025", label: "2025" },  // Add new year
-     { href: "/conference/2024", label: "2024" },
-     // ...
-   ];
-   ```
-
-### Adding Images to New Pages
-
-1. Place images in `public/images/sections/` or appropriate subfolder
-2. Use Next.js Image component:
-   ```tsx
-   import Image from "next/image";
-
-   <Image
-     src="/images/sections/your-image.jpg"
-     alt="Descriptive alt text"
-     width={600}
-     height={400}
-     className="w-full h-auto object-cover"
-   />
-   ```
-
-## Checklist for New Pages
-
-- [ ] Page follows existing structure and patterns
-- [ ] Hero section with appropriate title
-- [ ] Responsive design (works on mobile)
-- [ ] All images have alt text
-- [ ] Added to navigation if user-facing
-- [ ] Tested with `npm run dev`
+The verifier checks every internal link and image and fails on any Webflow CDN reference. New pages are included in the sitemap automatically. Commit and push to `main`; Cloudflare Pages deploys it.

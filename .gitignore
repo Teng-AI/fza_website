@@ -26,3 +26,6 @@ webflow_export/
 .vercel/
 .playwright-mcp/
 .claude/compaction-archives/
+
+# migration source snapshot (local only)
+migration-source.zip

@@ -7,73 +7,35 @@ description: Update text, images, links, and other content on the FZA website. U
 
 ## Overview
 
-This skill helps update content on the Fuzhou America website without breaking existing functionality.
+This site is Astro (static output, plain CSS, no client framework). Most content edits are markdown changes under `src/content/`; page copy lives in `.astro` files under `src/pages/`.
 
-## Project Structure
+## Where content lives
 
-- **Pages**: Located in `src/app/` - each folder is a route (e.g., `about/page.tsx` = `/about`)
-- **Components**: Located in `src/components/` (Header, Footer, SectionImage)
-- **Images**: Located in `public/images/`
-- **Styles**: Tailwind CSS in `src/app/globals.css`
-
-## Common Content Locations
-
-| Content Type | Location |
+| Content type | Location |
 |--------------|----------|
-| Homepage sections | `src/app/page.tsx` |
-| About page text/stats | `src/app/about/page.tsx` |
-| Team members | `src/app/team/page.tsx` |
-| Contact info | `src/app/contact/page.tsx` |
-| Navigation links | `src/components/Header.tsx` |
-| Footer content | `src/components/Footer.tsx` |
-| Site title/description | `src/app/layout.tsx` (metadata) |
+| Team members | `src/content/team/*.md` (one file per person) |
+| Media/press links | `src/content/media/*.md` (one file per article) |
+| Conference pages | `src/content/conferences/{year}.md` (one file per year) |
+| Homepage copy | `src/pages/index.astro` |
+| About page copy | `src/pages/about.astro` |
+| Contact page + Formspree endpoint | `src/pages/contact.astro` |
+| Nav (logo, links, CTA button) | `src/components/Nav.astro` |
+| Footer (beehiiv form ID, socials) | `src/components/Footer.astro` |
+| Site-wide SEO/meta defaults | `src/layouts/Base.astro` |
+| Images | `public/images/` (brand kit in `public/images/brand/`) |
+| Styles and brand colors | `src/styles/global.css` (CSS custom properties at top) |
+
+Collection schemas are defined in `src/content.config.ts`. A build fails loudly if a markdown file does not match its schema.
 
 ## Instructions
 
-### Updating Text Content
+1. Find the file using the table above. For collection items, copy an existing file as the template.
+2. Edit with the Edit tool. Keep frontmatter fields matching the schema.
+3. Verify: `npm run build && npm run verify` (checks every internal link and image, and that no Webflow URLs remain).
+4. Commit and push to `main`. Cloudflare Pages auto-deploys in about a minute.
 
-1. Identify which page contains the content (ask user if unclear)
-2. Read the current file to find the exact text
-3. Use the Edit tool to replace old text with new text
-4. Run `npm run dev` to verify changes look correct
+## Gotchas
 
-### Updating Statistics (About Page)
-
-The stats are in the `stats` array at the top of `src/app/about/page.tsx`:
-```tsx
-const stats = [
-  { number: "8000+", label: "Active online members" },
-  // ... more stats
-];
-```
-
-### Updating Media Links (Homepage)
-
-The media links are in the `mediaLinks` array in `src/app/page.tsx`:
-```tsx
-const mediaLinks = [
-  { publication: "Slate", title: "...", url: "..." },
-  // ... more links
-];
-```
-
-### Updating Navigation
-
-Navigation links are in `src/components/Header.tsx`:
-- `navLinks` array for main navigation
-- `conferenceLinks` array for conference dropdown
-
-### Replacing Images
-
-1. Ask user to provide the new image file
-2. Save new image to `public/images/` with a descriptive name
-3. Update the `src` attribute in the relevant component
-4. Ensure alt text is descriptive for accessibility
-
-## Best Practices
-
-- Always read the file first before making changes
-- Keep the same formatting and structure as existing content
-- Maintain consistent capitalization and punctuation
-- Test changes with `npm run dev` before considering done
-- For images, use descriptive filenames and alt text
+- Image paths in content start with `/images/...` and the file must exist under `public/images/`.
+- The README's "Editing content" section documents the same workflows for non-developers; keep the two consistent if workflows change.
+- External embeds: contact form posts to Formspree (endpoint const in `contact.astro`); newsletter form is a beehiiv embed (form ID const in `Footer.astro`).
