@@ -13,7 +13,7 @@ export async function getStaticPaths() {
 const { entry } = Astro.props;
 const c = entry.data;
 const { Content } = await render(entry);
-const pageTitle = `${c.name}: ${c.theme} | Fuzhou, America`;
+const pageTitle = `${c.name}: ${c.theme} | Fuzhou America`;
 ---
 
 <Base title={pageTitle} description={`${c.name} ${c.year}: ${c.theme}, the Fuzhou America annual conference.`}>

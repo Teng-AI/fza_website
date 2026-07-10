@@ -1,10 +1,18 @@
 import { defineConfig } from 'astro/config';
+import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
+  // Canonical production domain: used for canonical URLs, og tags, and the
+  // sitemap. Cloudflare's _redirects handles the old conference URLs
+  // server-side; the meta-refresh stubs below are a fallback for other hosts.
+  site: 'https://www.fuzhouamerica.org',
   output: 'static',
-  // Meta-refresh fallback pages so old conference URLs work on any host.
-  // Cloudflare Pages also gets server-side 301s via public/_redirects.
+  integrations: [
+    sitemap({
+      filter: (page) => !page.includes('/talktoomuch'),
+    }),
+  ],
   redirects: {
     '/talktoomuch2024': '/conference/2024',
     '/talktoomuch2023': '/conference/2023',

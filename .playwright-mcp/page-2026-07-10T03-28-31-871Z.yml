@@ -1,0 +1,70 @@
+- generic [active] [ref=e1]:
+  - navigation [ref=e2]:
+    - generic [ref=e3]:
+      - link "Fuzhou America home" [ref=e4] [cursor=pointer]:
+        - /url: /
+        - img "Fuzhou America logo" [ref=e5]
+      - generic [ref=e6]:
+        - link "Home" [ref=e7] [cursor=pointer]:
+          - /url: /
+        - link "About" [ref=e8] [cursor=pointer]:
+          - /url: /about
+        - link "Team" [ref=e9] [cursor=pointer]:
+          - /url: /team
+        - link "Support Us" [ref=e10] [cursor=pointer]:
+          - /url: /support-us
+        - generic [ref=e11]: Conference
+        - link "Contact" [ref=e13] [cursor=pointer]:
+          - /url: /contact
+        - link "Follow Our Journey" [ref=e14] [cursor=pointer]:
+          - /url: https://www.instagram.com/fuzhouamerica
+  - main [ref=e15]:
+    - heading "Contact Us" [level=1] [ref=e17]
+    - generic [ref=e19]:
+      - generic [ref=e20]:
+        - heading "Contact us" [level=2] [ref=e21]
+        - paragraph [ref=e22]:
+          - text: Drop us a line for any inquiries regarding press, partnerships, or involvement. Feel free to use the form below or email
+          - link "info@fuzhouamerica.org" [ref=e23] [cursor=pointer]:
+            - /url: mailto:info@fuzhouamerica.org
+        - generic [ref=e24]:
+          - textbox "Enter your name" [ref=e25]
+          - textbox "Enter your email" [ref=e26]
+          - textbox "Message" [ref=e27]
+          - button "Start Now" [ref=e28] [cursor=pointer]
+      - generic [ref=e29]:
+        - heading "Home base" [level=3] [ref=e30]
+        - paragraph [ref=e31]: Find us at the heart of New York Chinatown
+        - heading "OUR OFFICE" [level=4] [ref=e32]
+        - paragraph [ref=e33]: 43-28 158th St Unit B Flushing, NY 11358
+        - heading "WORKING HOURS" [level=4] [ref=e34]
+        - paragraph [ref=e35]: 9AM - 5PM, Mon to Fri
+        - heading "CONTACT" [level=4] [ref=e36]
+        - paragraph [ref=e37]:
+          - link "info@fuzhouamerica.org" [ref=e38] [cursor=pointer]:
+            - /url: mailto:info@fuzhouamerica.org
+        - paragraph [ref=e39]:
+          - link "View on Google Maps" [ref=e40] [cursor=pointer]:
+            - /url: https://maps.google.com/?q=43-28+158th+St,+Flushing,+NY+11358
+  - contentinfo [ref=e41]:
+    - generic [ref=e42]:
+      - heading "Join Our Community" [level=2] [ref=e43]
+      - paragraph [ref=e44]: Share your story with us — we want to hear from you!
+      - generic [ref=e46]:
+        - link "Facebook group" [ref=e47] [cursor=pointer]:
+          - /url: https://www.facebook.com/groups/subtlefuzhoutraits
+        - link "Instagram" [ref=e50] [cursor=pointer]:
+          - /url: https://www.instagram.com/fuzhouamerica
+        - link "Email us" [ref=e54] [cursor=pointer]:
+          - /url: mailto:info@fuzhouamerica.org
+    - generic [ref=e58]:
+      - generic [ref=e59]:
+        - link "About" [ref=e60] [cursor=pointer]:
+          - /url: /about
+        - link "Team" [ref=e61] [cursor=pointer]:
+          - /url: /team
+        - link "Support Us" [ref=e62] [cursor=pointer]:
+          - /url: /support-us
+        - link "Contact" [ref=e63] [cursor=pointer]:
+          - /url: /contact
+      - paragraph [ref=e64]: © 2026 Fuzhou America. A 501(c)(3) nonprofit organization.
