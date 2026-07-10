@@ -44,7 +44,7 @@ body {
   margin: 0;
   font-family: 'Montserrat', sans-serif;
   color: var(--body);
-  font-size: 16px;
+  font-size: 17px;
   line-height: 1.7;
   background: #fff;
 }
@@ -63,8 +63,29 @@ h1,
 h2,
 h3,
 h4 {
-  line-height: 1.2;
+  line-height: 1.1;
   margin: 0 0 0.5em;
+}
+
+/* Readable measure for running text; opt back out where layout needs full width */
+.section p,
+.conf-story p {
+  max-width: 68ch;
+}
+.section [style*='text-align: center'] p,
+.person-card p,
+.why-card p {
+  margin-inline: auto;
+}
+.section ul {
+  max-width: 68ch;
+  padding-left: 22px;
+}
+.section ul li {
+  margin-bottom: 10px;
+}
+.section ul li::marker {
+  color: var(--fza-red);
 }
 
 .container {
@@ -74,17 +95,22 @@ h4 {
 }
 
 .section {
-  padding: 60px 0;
+  padding: 80px 0;
+}
+@media (max-width: 760px) {
+  .section {
+    padding: 52px 0;
+  }
 }
 
 /* Labels above section headings ("What we believe in", "news", ...) */
 .label {
   font-family: 'Bebas Neue', sans-serif;
-  letter-spacing: 3px;
+  letter-spacing: 4px;
   text-transform: uppercase;
   color: var(--fza-red);
-  font-size: 18px;
-  margin-bottom: 8px;
+  font-size: 14px;
+  margin-bottom: 10px;
 }
 
 .heading-jumbo {
@@ -507,6 +533,7 @@ h4 {
 .stat-caption {
   font-size: 14px;
   margin-top: 8px;
+  color: var(--grey);
 }
 
 /* Responsive video embeds */
