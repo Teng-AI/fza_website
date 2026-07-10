@@ -28,3 +28,11 @@
 **What works:** Compare three views: authoritative (`dig @<ns>`), public resolver (`dig @1.1.1.1`), and the local resolver (`dig` bare, check remaining TTL in the answer). Then test serving with `curl --resolve host:443:<fresh-ip>` to bypass cache entirely. If authoritative and 1.1.1.1 agree, the change is live; the local view is just router cache with a visible TTL countdown.
 **Reuse:** any DNS migration where "it doesn't work for me" needs to be split into global vs local.
 **Scope:** global
+
+## [2026-07-10] Squarespace Domains II transfers cannot be expedited
+
+**Type:** domain
+**Insight:** Domains registered under "Squarespace Domains II LLC" (the post-Google-Domains registrar entity) have a reject-only transfer confirmation: the email exists to cancel hijacked transfers, and no dashboard accept button exists. Transfers auto-complete in about 5 days. Only Squarespace's Tucows-registered domains get a speed-up confirmation email from the gaining side.
+**Source:** Squarespace support docs during the fuzhouamerica.org/.com transfer to Cloudflare Registrar.
+**Applies to:** planning timelines for any transfer away from Squarespace.
+**Scope:** global
