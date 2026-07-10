@@ -430,6 +430,13 @@ h4 {
     gap: 20px;
   }
 }
+/* Text stays first in the source (so phones read text then photo);
+   cc-flip moves the photo to the left column on wide screens only */
+@media (min-width: 761px) {
+  .feature-row.cc-flip > div {
+    order: 2;
+  }
+}
 
 /* People / card grids */
 .people-grid {
