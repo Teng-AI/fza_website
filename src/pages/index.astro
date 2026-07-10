@@ -1,0 +1,91 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Cta from '../components/Cta.astro';
+
+const media = (await getCollection('media')).sort((a, b) => a.data.order - b.data.order);
+---
+
+<Base title="Fuzhou, America" current="home">
+  <header class="intro-header">
+    <div>
+      <h1 class="heading-jumbo">Welcome to Fuzhou America</h1>
+      <a href="/about" class="button cc-light">Learn More</a>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="container" style="text-align: center;">
+      <div class="label">What we believe in</div>
+      <h2 class="section-heading">Connecting Fuzhou Americans to socialize, network, and celebrate heritage</h2>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="feature-row">
+        <div>
+          <div class="label">web</div>
+          <h2 class="section-heading">Online Community</h2>
+          <p>Join our Facebook Group &amp; Newsletter to connect with our community of 8000+ Fuzhou Americans</p>
+        </div>
+        <img src="/images/home/community.jpg" alt="Fuzhou America community members" loading="lazy" />
+      </div>
+      <div class="feature-row">
+        <img src="/images/home/meetup.jpg" alt="Fuzhou America members at a social event" loading="lazy" />
+        <div>
+          <div class="label">meetup</div>
+          <h2 class="section-heading">Social + Cultural Hangouts</h2>
+          <p>We meet every week from recurring socials to holiday parades, so our members can connect in-person</p>
+        </div>
+      </div>
+      <div class="feature-row">
+        <div>
+          <div class="label">Getaway</div>
+          <h2 class="section-heading">Inclusive Retreats</h2>
+          <p>We host multiple retreats each year for smaller group gatherings where people can bond over shared experiences and aspirations</p>
+        </div>
+        <img src="/images/home/retreats.jpg" alt="Fuzhou America members on a retreat" loading="lazy" />
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="label">news</div>
+      <h2 class="section-heading">Fuzhou Americans in the Media</h2>
+      <ul class="media-list">
+        {media.map((m) => (
+          <li>
+            <a href={m.data.url}>
+              <strong>{m.data.outlet}:</strong> <span set:html={`“${m.data.title}”`} />
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <Cta />
+</Base>
+
+<style>
+  .media-list {
+    list-style: none;
+    padding: 0;
+    margin: 24px 0 0;
+  }
+  .media-list li {
+    border-bottom: 1px solid #e6e6e6;
+  }
+  .media-list a {
+    display: block;
+    padding: 18px 0;
+    text-decoration: none;
+    font-size: 18px;
+    transition: color 0.2s;
+  }
+  .media-list a:hover {
+    color: var(--fza-red);
+  }
+</style>

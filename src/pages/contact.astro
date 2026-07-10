@@ -1,0 +1,71 @@
+---
+import Base from '../layouts/Base.astro';
+import Cta from '../components/Cta.astro';
+
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xeebyoyo';
+---
+
+<Base title="Contact | Fuzhou, America" current="contact">
+  <header class="intro-header cc-subpage">
+    <h1 class="heading-jumbo">Contact Us</h1>
+  </header>
+
+  <section class="section">
+    <div class="container contact-grid">
+      <div>
+        <h2 class="section-heading">Contact us</h2>
+        <p>
+          Drop us a line for any inquiries regarding press, partnerships, or involvement. Feel free to use the form
+          below or email <a href="mailto:info@fuzhouamerica.org">info@fuzhouamerica.org</a>
+        </p>
+        <form action={FORMSPREE_ENDPOINT} method="POST">
+          <input class="form-field" type="text" name="name" placeholder="Enter your name" />
+          <input class="form-field" type="email" name="email" placeholder="Enter your email" required />
+          <textarea class="form-field" name="message" placeholder="Message" maxlength="5000"></textarea>
+          <button type="submit" class="button">Start Now</button>
+        </form>
+      </div>
+      <div>
+        <h3 class="section-heading">Home base</h3>
+        <p>Find us at the heart of New York Chinatown</p>
+        <h4>OUR OFFICE</h4>
+        <p>
+          43-28 158th St<br />
+          Unit B<br />
+          Flushing, NY 11358
+        </p>
+        <h4>WORKING HOURS</h4>
+        <p>9AM - 5PM, Mon to Fri</p>
+        <h4>CONTACT</h4>
+        <p><a href="mailto:info@fuzhouamerica.org">info@fuzhouamerica.org</a></p>
+        <p>
+          <a href="https://maps.google.com/?q=43-28+158th+St,+Flushing,+NY+11358">View on Google Maps</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <Cta />
+</Base>
+
+<style>
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: 60px;
+  }
+  .contact-grid h4 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-weight: 400;
+    letter-spacing: 2px;
+    font-size: 18px;
+    margin: 24px 0 4px;
+    color: var(--fza-red);
+  }
+  @media (max-width: 760px) {
+    .contact-grid {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+  }
+</style>

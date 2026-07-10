@@ -1,0 +1,54 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Cta from '../components/Cta.astro';
+
+const team = await getCollection('team');
+const byOrder = (a: any, b: any) => a.data.order - b.data.order;
+const executive = team.filter((m) => m.data.board === 'executive').sort(byOrder);
+const advisory = team.filter((m) => m.data.board === 'advisory').sort(byOrder);
+---
+
+<Base title="Team | Fuzhou, America" current="team">
+  <header class="intro-header cc-subpage">
+    <h1 class="heading-jumbo">Meet the Team</h1>
+  </header>
+
+  <section class="section">
+    <div class="container">
+      <div class="label">Executive Board</div>
+      <h2 class="section-heading">We lay out the vision for the organization</h2>
+      <div class="people-grid">
+        {executive.map((m) => (
+          <div class="person-card">
+            <a href={m.data.linkedin}>
+              <img src={m.data.image} alt={m.data.name} loading="lazy" />
+              <h3>{m.data.name}</h3>
+            </a>
+            <p>{m.data.role}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="label">Advisory Board</div>
+      <h2 class="section-heading">Our advisors carry expertise across industries</h2>
+      <div class="people-grid">
+        {advisory.map((m) => (
+          <div class="person-card">
+            <a href={m.data.linkedin}>
+              <img src={m.data.image} alt={m.data.name} loading="lazy" />
+              <h3>{m.data.name}</h3>
+            </a>
+            <p>{m.data.role}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Cta />
+</Base>
