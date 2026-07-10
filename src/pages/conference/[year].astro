@@ -78,7 +78,9 @@ const pageTitle = `${c.name}: ${c.theme} | Fuzhou, America`;
         {c.recap.photos.length > 0 && (
           <div class="gallery">
             {c.recap.photos.map((p) => (
-              <img src={p} alt={`${c.recap.title} photo`} loading="lazy" />
+              <a href={p} target="_blank" rel="noopener">
+                <img src={p} alt={`${c.recap.title} photo`} loading="lazy" />
+              </a>
             ))}
           </div>
         )}
@@ -94,7 +96,9 @@ const pageTitle = `${c.name}: ${c.theme} | Fuzhou, America`;
         {c.community.photos.length > 0 && (
           <div class="gallery">
             {c.community.photos.map((p) => (
-              <img src={p} alt="Fuzhou America community" loading="lazy" />
+              <a href={p} target="_blank" rel="noopener">
+                <img src={p} alt="Fuzhou America community" loading="lazy" />
+              </a>
             ))}
           </div>
         )}

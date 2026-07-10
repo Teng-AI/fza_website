@@ -212,19 +212,94 @@ h4 {
   padding: 8px 20px;
   text-align: center;
 }
+
+/* Nav CTA: quieter outline style so links stay the header's focus */
+.nav-menu .button.cc-nav {
+  background: transparent;
+  color: var(--body);
+  border: 1px solid var(--ink);
+  padding: 12px 24px;
+}
+.nav-menu .button.cc-nav:hover {
+  background: var(--fza-red);
+  border-color: var(--fza-red);
+  color: #fff;
+}
+
+/* Hamburger (CSS-only, no JS): checkbox toggles the menu on small screens */
+.nav-toggle,
+.nav-toggle-label {
+  display: none;
+}
+
 @media (max-width: 760px) {
   .navigation .container {
     padding-top: 10px;
     padding-bottom: 10px;
-    gap: 8px 20px;
   }
   .nav-logo img {
     height: 44px;
   }
-  .nav-menu {
-    gap: 10px 18px;
+  .nav-toggle {
+    display: block;
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
   }
-  .nav-menu .button {
+  .nav-toggle-label {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 10px 4px;
+    margin-left: auto;
+    cursor: pointer;
+  }
+  .nav-toggle-label span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--ink);
+    transition: transform 0.2s, opacity 0.2s;
+  }
+  .nav-toggle:focus-visible ~ .nav-toggle-label {
+    outline: 2px solid var(--fza-red);
+    outline-offset: 2px;
+  }
+  .nav-toggle:checked ~ .nav-toggle-label span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+  .nav-toggle:checked ~ .nav-toggle-label span:nth-child(2) {
+    opacity: 0;
+  }
+  .nav-toggle:checked ~ .nav-toggle-label span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+  .nav-menu {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 10px 0 14px;
+  }
+  .nav-toggle:checked ~ .nav-menu {
+    display: flex;
+  }
+  /* Conference years render inline under the label on mobile (no hover) */
+  .nav-dropdown-list {
+    display: block;
+    position: static;
+    transform: none;
+    border: none;
+    box-shadow: none;
+    min-width: 0;
+    padding: 8px 0 0 16px;
+  }
+  .nav-dropdown-list a {
+    padding: 4px 0;
+    text-align: left;
+  }
+  .nav-menu .button.cc-nav {
     padding: 10px 20px;
   }
 }
@@ -343,6 +418,9 @@ h4 {
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   gap: 12px;
   margin-top: 32px;
+}
+.gallery a {
+  display: block;
 }
 .gallery img {
   width: 100%;

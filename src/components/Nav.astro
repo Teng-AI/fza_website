@@ -10,6 +10,12 @@ const { current = '' } = Astro.props;
     <a href="/" class="nav-logo" aria-label="Fuzhou America home">
       <img src="/images/logo.png" alt="Fuzhou America logo" />
     </a>
+    <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Toggle navigation menu" />
+    <label for="nav-toggle" class="nav-toggle-label">
+      <span></span>
+      <span></span>
+      <span></span>
+    </label>
     <div class="nav-menu">
       <a href="/" class="nav-link" aria-current={current === 'home' ? 'page' : undefined}>Home</a>
       <a href="/about" class="nav-link" aria-current={current === 'about' ? 'page' : undefined}>About</a>
@@ -22,7 +28,7 @@ const { current = '' } = Astro.props;
         </div>
       </div>
       <a href="/contact" class="nav-link" aria-current={current === 'contact' ? 'page' : undefined}>Contact</a>
-      <a href="https://bit.ly/sitebuttons" class="button">Join our Community</a>
+      <a href="https://bit.ly/sitebuttons" class="button cc-nav">Join our Community</a>
     </div>
   </div>
 </nav>
