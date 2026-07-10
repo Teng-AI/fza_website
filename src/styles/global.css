@@ -360,12 +360,13 @@ h4 {
   background: var(--zodiac);
 }
 .newsletter-embed {
-  display: block;
-  width: 100%;
-  max-width: 460px;
-  height: 56px;
-  border: 0;
+  max-width: 480px;
+  min-height: 96px;
   margin: 0 auto;
+}
+.newsletter-embed iframe {
+  border: 0;
+  width: 100%;
 }
 .footer-socials {
   display: flex;
