@@ -29,3 +29,6 @@ webflow_export/
 
 # migration source snapshot (local only)
 migration-source.zip
+
+# local ops breadcrumb, not for the public repo
+HANDOVER.md
