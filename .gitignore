@@ -32,3 +32,6 @@ migration-source.zip
 
 # local ops breadcrumb, not for the public repo
 HANDOVER.md
+
+# ops files never published
+learnings.md
