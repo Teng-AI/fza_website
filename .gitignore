@@ -31,8 +31,14 @@ webflow_export/
 migration-source.zip
 
 # local ops breadcrumb, not for the public repo
-HANDOVER.md
+HANDOVER*.md
 
 # ops files never published
-learnings.md
+learnings*.md
 brainstorms/
+
+# Cloud-sync conflict copies. Drive and iCloud append " 2", " 3" to a filename, which
+# defeats an exact-name ignore: `learnings.md` does not match `learnings 2.md`. Both exist
+# in this repo right now, untracked only by luck, and a `git add -A` would publish them.
+* [0-9].*
+* [0-9]/
