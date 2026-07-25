@@ -26,6 +26,14 @@ served from this repo. Node 18 or newer.
 - **Untracking a file does not unpublish it.** `HANDOVER.md` and `learnings.md` were committed
   here and later removed, so they remain readable in history. Keep meta files out in the first
   place; the `.gitignore` block is the mechanism.
+- **That history exposure is a closed decision, not an open finding** (Teng, 2026-07-25).
+  The content was read before deciding: domain-transfer operations, dates, ~$22 in registrar
+  cost, `info@fuzhouamerica.org` (already public on the site), and the phrase "home address"
+  describing a registrar field. **No street address, ZIP, phone, or credentials.** Accepted
+  rather than scrubbed because a `filter-repo` rewrite on a public repo breaks existing clones
+  for a low-severity payload. Do not reopen this without new evidence; if a future audit flags
+  it, the answer is here. Contrast with mahjong **v1**, which holds an actual Firebase API key
+  and is a genuinely different case.
 - **Cloud-sync conflict copies are a live hazard.** Drive appends " 2" to filenames, which
   defeats an exact-name ignore. `learnings 2.md` and `astro.config 2.mjs` are sitting untracked
   in this working tree right now. The `.gitignore` covers the pattern; do not weaken it.
