@@ -4,9 +4,10 @@ import Base from '../../layouts/Base.astro';
 
 const editions = (await getCollection('conferences')).sort((a, b) => b.data.year - a.data.year);
 
-// Edition-card art; 2025 has no photo set, so it renders as a text card.
+// Edition-card art per year.
 const cardArt: Record<number, string> = {
   2026: '/images/home/ttm-card.jpg',
+  2025: '/images/conference/2025/recap-1.jpg',
   2024: '/images/conference/2024/hero-bg.jpg',
   2023: '/images/conference/2023/hero-bg.jpg',
   2022: '/images/conference/2022/hero-bg.jpg',
@@ -21,7 +22,7 @@ const cardArt: Record<number, string> = {
   <header class="hub-hero">
     <img src="/images/conference/hub-hero.jpg" alt="A Chinatown street strung with garlands in warm light" fetchpriority="high" />
     <div class="hub-hero-inner shell">
-      <p class="hub-presenter">Fuzhou America presents</p>
+      <p class="hub-presenter">Fuzhou America presents <span lang="zh" class="hub-cn">年度大会</span></p>
       <h1>Talk Too<br />Much</h1>
       <p class="hub-sub">
         Our themed annual conference, running since 2022: a day of talks, films, panels, and a room
@@ -79,6 +80,12 @@ const cardArt: Record<number, string> = {
     font-weight: 700;
     color: var(--fortune-cookie);
     margin: 0;
+  }
+  .hub-cn {
+    font-family: var(--cn);
+    font-weight: 700;
+    letter-spacing: 5px;
+    margin-left: 10px;
   }
   .hub-hero h1 {
     font-family: var(--display);
