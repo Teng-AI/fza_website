@@ -13,13 +13,16 @@ export async function getStaticPaths() {
 const { entry } = Astro.props;
 const c = entry.data;
 const { Content } = await render(entry);
-const pageTitle = c.theme ? `${c.name} ${c.year}: ${c.theme} | Fuzhou America` : `${c.name} ${c.year} | Fuzhou America`;
-const pageDesc = c.theme
-  ? `${c.name} ${c.year}: ${c.theme}, the Fuzhou America annual conference.`
-  : `${c.name} ${c.year}, the Fuzhou America annual conference.`;
+// The hero shows `name` in caps; titles and descriptions read better in title case.
+const titleCase = (s: string) => s.toLowerCase().replace(/(^|[\s-])\w/g, (m) => m.toUpperCase());
+// 2022's theme is also its name ("Take-Out Only"), so only show a theme that adds something.
+const theme = c.theme && c.theme.toLowerCase() !== c.name.toLowerCase() ? c.theme : undefined;
+const label = `${titleCase(c.name)} ${c.year}${theme ? `: ${theme}` : ''}`;
+const pageTitle = `${label} | Fuzhou America`;
+const pageDesc = `${label}, Fuzhou America's annual conference, on ${c.dateDisplay} at ${c.venueShort}.`;
 ---
 
-<Base title={pageTitle} description={pageDesc} current="conference">
+<Base title={pageTitle} description={pageDesc} current="conference" ogImage={`/images/og/conference-${c.year}.jpg`}>
   <header class="conf-hero" style={c.heroImage ? `background-image: url('${c.heroImage}')` : ''}>
     <div class="conf-hero-inner">
       <p class="conf-hero-meta">
@@ -29,7 +32,7 @@ const pageDesc = c.theme
       <p class="conf-presenter">{c.presenterLine}</p>
       <h1>
         {c.name}
-        {c.theme && <span class="conf-theme">{c.theme}</span>}
+        {theme && <span class="conf-theme">{theme}</span>}
       </h1>
       {c.pastEventNote && <p class="past-note">{c.pastEventNote}</p>}
       {c.ticketUrl && <a href={c.ticketUrl} class="btn btn-light">Buy Tickets</a>}

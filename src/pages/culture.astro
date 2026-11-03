@@ -15,7 +15,7 @@ const byTheme = readingThemes.map((t) => ({
   items: articles.filter((m) => m.data.theme === t.key).sort((a, b) => a.data.order - b.data.order),
 }));
 
-const pageURL = new URL('/culture', Astro.site).href;
+const pageURL = new URL('/culture/', Astro.site).href;
 const schemaType = { article: 'Article', book: 'Book', film: 'Movie' } as const;
 
 const workSchema = (m: (typeof media)[number]) => {
@@ -95,7 +95,7 @@ const schema = [
       <p class="culture-intro">
         Fuzhounese Americans trace their families to Fuzhou, the capital of Fujian province on China's southeast
         coast. Large numbers came to New York from the 1980s on, built a community around East Broadway in
-        Manhattan's Chinatown and in Sunset Park, Brooklyn, and opened takeout restaurants across the country. Our
+        Manhattan's Chinatown and in Sunset Park, Brooklyn, and opened take-out restaurants across the country. Our
         dialect is Fuzhounese (<span lang="zh">福州话</span>), also written Foochow.
       </p>
       <h2 class="sec-title">From our community</h2>
