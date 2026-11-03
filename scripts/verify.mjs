@@ -50,6 +50,11 @@ for (const file of htmlFiles) {
     ...html.matchAll(/url\('([^']+)'\)/g),
   ].map((m) => m[1]);
 
+  // Link-preview images are absolute site URLs in meta tags; check they resolve too.
+  for (const m of html.matchAll(/(?:og|twitter):image" content="https:\/\/www\.fuzhouamerica\.org([^"]+)"/g)) {
+    refs.push(m[1]);
+  }
+
   for (const ref of refs) {
     if (/^(https?:|mailto:|#|data:)/.test(ref)) continue;
     if (!resolvable(ref)) {
