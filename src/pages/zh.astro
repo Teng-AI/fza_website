@@ -1,0 +1,90 @@
+---
+import Base from '../layouts/Base.astro';
+// 给爸妈看的一页: a single page, in Chinese, that explains FZA for a member's family.
+// DRAFT COPY: written by Claude, pending Teng's native-speaker pass before merge.
+---
+
+<Base
+  title="给爸妈看的一页 | Fuzhou America 福州青年会"
+  description="用中文介绍福州青年会（Fuzhou America）：我们是谁、做什么、为什么值得您的孩子参加。"
+  current="zh"
+>
+  <div lang="zh" class="zh-page">
+    <header class="page-head">
+      <div class="shell page-head-inner">
+        <h1 class="zh-h1">给爸妈看的一页</h1>
+        <span class="page-head-cn" style="letter-spacing: 2px; font-family: var(--sans); font-weight: 600;">A page to show your parents</span>
+      </div>
+    </header>
+
+    <section class="section">
+      <div class="shell prose zh-prose">
+        <h2 class="zh-title">我们是谁</h2>
+        <p>
+          福州青年会（英文名 Fuzhou America，简称 FZA）是在纽约正式注册的非营利组织，2019 年在法拉盛成立，
+          拥有美国联邦 501(c)(3) 免税资格。我们把在美国长大的福州人聚集在一起，一起交朋友、办活动、传承文化。
+        </p>
+
+        <h2 class="zh-title">我们做什么</h2>
+        <p>
+          每年我们举办大型年度聚会 Talk Too Much 和农历新年晚宴，几百人一起吃饭、看节目、听讲座。
+          平时每个星期都有活动：打麻将、看电影、聚餐、短途旅行。
+        </p>
+        <p>
+          我们也做文化项目：福州话词典、福建美食故事、福州历史小知识，还支持年轻人拍电影、办电影节。
+        </p>
+
+        <h2 class="zh-title">为什么有这个组织</h2>
+        <p>
+          我们这一代很多人在餐馆里长大，一边适应美国生活，一边帮家里干活，很少有机会认识和自己背景一样的朋友。
+          在福州青年会，年轻人能找到听得懂自己故事的同伴，也能为自己的福州背景感到骄傲。
+        </p>
+
+        <h2 class="zh-title">正规吗？</h2>
+        <p>
+          正规。我们是纽约州注册的非营利机构，在纽约州总检察长慈善局备案，团队全部是志愿者。
+          给我们的捐款在法律允许范围内可以抵税。
+        </p>
+
+        <h2 class="zh-title">想了解更多</h2>
+        <p>
+          可以关注我们的 Instagram：<a href="https://www.instagram.com/fuzhouamerica">@fuzhouamerica</a>，
+          或者发邮件到 <a href="mailto:info@fuzhouamerica.org">info@fuzhouamerica.org</a>。
+        </p>
+        <p>欢迎您，也欢迎您的孩子，来参加我们的活动。</p>
+      </div>
+    </section>
+  </div>
+</Base>
+
+<style>
+  .zh-page .zh-h1 {
+    font-family: var(--cn);
+    font-weight: 700;
+    font-size: clamp(38px, 6vw, 64px);
+    letter-spacing: 4px;
+  }
+  .zh-prose {
+    font-size: 18.5px;
+    line-height: 1.9;
+  }
+  .zh-title {
+    font-family: var(--cn);
+    font-weight: 700;
+    font-size: clamp(24px, 3vw, 30px);
+    letter-spacing: 2px;
+    color: var(--red-deep);
+    margin: 38px 0 10px;
+  }
+  .zh-title:first-child {
+    margin-top: 0;
+  }
+  .zh-prose a {
+    color: var(--red-deep);
+    font-weight: 600;
+  }
+  .zh-page .section.cc-last,
+  .zh-page .section {
+    padding-bottom: clamp(64px, 9vw, 112px);
+  }
+</style>

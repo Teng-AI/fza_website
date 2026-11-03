@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
+import Shelf from '../components/Shelf.astro';
 
 // Homepage press: the six entries flagged `featured`, ordered; the full archive lives on /culture.
 const media = (await getCollection('media')).filter((m) => m.data.featured).sort((a, b) => (a.data.featured ?? 99) - (b.data.featured ?? 99));
@@ -71,38 +72,7 @@ const media = (await getCollection('media')).filter((m) => m.data.featured).sort
   <section class="section">
     <div class="shell">
       <h2 class="sec-title">From our community</h2>
-      <div class="shelf">
-        <a class="tile" href="https://fuzhounese.org/">
-          <span class="tile-name">Fuzhounese-English Dictionary</span>
-          <span class="tile-desc">Look up the words your family actually says.</span>
-          <span class="tile-credit">By Noah Lee</span>
-        </a>
-        <a class="tile" href="https://www.instagram.com/flavorsoffujian">
-          <span class="tile-name">Flavors of Fujian</span>
-          <span class="tile-desc">Fujianese food stories, dish by dish.</span>
-          <span class="tile-credit">By Allen Cao &amp; Jess Eng</span>
-        </a>
-        <a class="tile" href="https://www.fuzhoufood.com/">
-          <span class="tile-name">Fuzhou Food</span>
-          <span class="tile-desc">Home recipes from Fuzhou, one of China's eight great cuisines.</span>
-          <span class="tile-credit">By brothers Ray &amp; Rich</span>
-        </a>
-        <a class="tile" href="https://seedandspark.com/fund/funeral-procession-of-fireflies">
-          <span class="tile-name">A Funeral Procession of Fireflies</span>
-          <span class="tile-desc">A feature film in development, set in 1990s Fuzhou.</span>
-          <span class="tile-credit">By Cynthia Lin &amp; Weijia Zhou</span>
-        </a>
-        <a class="tile" href="/culture#fj-facts">
-          <span class="tile-name">FJ Facts</span>
-          <span class="tile-desc">Fuzhounese history, one post at a time.</span>
-          <span class="tile-credit">By Fuzhou America</span>
-        </a>
-        <a class="tile" href="https://threegolds.app/">
-          <span class="tile-name">Three Golds</span>
-          <span class="tile-desc">A mahjong app that plays Fuzhou style.</span>
-          <span class="tile-credit">By FZA's Teng Zheng</span>
-        </a>
-      </div>
+      <Shelf />
     </div>
   </section>
 

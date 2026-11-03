@@ -9,32 +9,46 @@ const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xeebyoyo';
   description="Contact Fuzhou America for press, partnerships, or involvement. Based in Flushing, NY."
   current="contact"
 >
-  <header class="intro-header cc-subpage">
-    <h1 class="heading-jumbo">Contact Us</h1>
+  <header class="page-head">
+    <div class="shell page-head-inner">
+      <h1>Contact Us</h1>
+      <span class="page-head-cn" lang="zh">联系我们</span>
+    </div>
   </header>
 
-  <section class="section">
-    <div class="container contact-grid">
+  <section class="section cc-last">
+    <div class="shell contact-grid">
       <div>
-        <h2 class="section-heading">Contact us</h2>
+        <h2 class="sec-title">Drop us a line</h2>
         <p>
-          Drop us a line for any inquiries regarding press, partnerships, or involvement. Feel free to use the form
-          below or email <a href="mailto:info@fuzhouamerica.org">info@fuzhouamerica.org</a>
+          For any inquiries regarding press, partnerships, or involvement: use the form, or email
+          <a href="mailto:info@fuzhouamerica.org">info@fuzhouamerica.org</a>.
         </p>
         <form action={FORMSPREE_ENDPOINT} method="POST">
-          <input class="form-field" type="text" name="name" placeholder="Enter your name" />
-          <input class="form-field" type="email" name="email" placeholder="Enter your email" required />
-          <textarea class="form-field" name="message" placeholder="Message" maxlength="5000"></textarea>
-          <button type="submit" class="button">Start Now</button>
+          <label class="field">
+            <span>Your name</span>
+            <input class="form-field" type="text" name="name" autocomplete="name" />
+          </label>
+          <label class="field">
+            <span>Your email</span>
+            <input class="form-field" type="email" name="email" autocomplete="email" required />
+          </label>
+          <label class="field">
+            <span>Message</span>
+            <textarea class="form-field" name="message" maxlength="5000"></textarea>
+          </label>
+          <button type="submit" class="btn btn-red">Send message</button>
         </form>
       </div>
-      <div>
-        <h4>CONTACT</h4>
+      <aside class="contact-aside">
+        <h3>Contact</h3>
         <p><a href="mailto:info@fuzhouamerica.org">info@fuzhouamerica.org</a></p>
-      </div>
+        <h3>Everywhere else</h3>
+        <p><a href="https://www.instagram.com/fuzhouamerica">@fuzhouamerica</a></p>
+        <p><a href="https://www.facebook.com/groups/subtlefuzhoutraits">Subtle Fuzhou Traits</a></p>
+      </aside>
     </div>
   </section>
-
 </Base>
 
 <style>
@@ -43,18 +57,26 @@ const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xeebyoyo';
     grid-template-columns: 3fr 2fr;
     gap: 60px;
   }
-  .contact-grid h3 {
-    font-size: 28px;
+  .contact-grid form {
+    margin-top: 18px;
+    max-width: 560px;
   }
-  .contact-grid h4 {
-    font-family: 'Bebas Neue', sans-serif;
+  .contact-aside h3 {
+    font-family: var(--display);
     font-weight: 400;
     letter-spacing: 2px;
-    font-size: 18px;
-    margin: 24px 0 4px;
-    color: var(--fza-red);
+    text-transform: uppercase;
+    font-size: 20px;
+    margin: 26px 0 4px;
+    color: var(--red-deep);
   }
-  @media (max-width: 760px) {
+  .contact-aside h3:first-child {
+    margin-top: 8px;
+  }
+  .contact-aside p {
+    margin: 0 0 6px;
+  }
+  @media (max-width: 860px) {
     .contact-grid {
       grid-template-columns: 1fr;
       gap: 24px;

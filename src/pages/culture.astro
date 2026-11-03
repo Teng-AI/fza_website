@@ -1,0 +1,125 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Shelf from '../components/Shelf.astro';
+
+const media = await getCollection('media');
+const articles = media.filter((m) => m.data.kind === 'article');
+const longerShelf = media.filter((m) => m.data.kind !== 'article').sort((a, b) => a.data.order - b.data.order);
+
+const themes = [
+  { key: 'history', label: 'History' },
+  { key: 'immigration', label: 'Immigration' },
+  { key: 'chinatown', label: 'Chinatown' },
+  { key: 'food', label: 'Food' },
+  { key: 'second-gen', label: 'Second generation' },
+] as const;
+
+const byTheme = themes.map((t) => ({
+  ...t,
+  items: articles.filter((m) => m.data.theme === t.key).sort((a, b) => a.data.order - b.data.order),
+}));
+---
+
+<Base
+  title="Culture | Fuzhou America"
+  description="The Fuzhou America culture shelf: the dictionary, films, food stories, FJ Facts, and a reading room of journalism on the Fuzhounese-American experience."
+  current="culture"
+>
+  <header class="page-head">
+    <div class="shell page-head-inner">
+      <h1>Culture</h1>
+      <span class="page-head-cn" lang="zh">文化</span>
+      <p class="page-head-note">
+        What our community makes, and the best things ever written about us. This page is the permanent
+        record; the live feed is <a href="https://www.instagram.com/fuzhouamerica" class="head-link">@fuzhouamerica</a>.
+      </p>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="shell">
+      <h2 class="sec-title">From our community</h2>
+      <Shelf />
+    </div>
+  </section>
+
+  <section class="section" id="fj-facts">
+    <div class="shell">
+      <h2 class="sec-title">FJ Facts</h2>
+      <p class="sec-lede">
+        Short history lessons on Fuzhou and its diaspora, one post at a time. The archive is moving
+        onto this page; until then, the full set lives on our Instagram.
+      </p>
+      <a class="btn btn-red" href="https://www.instagram.com/fuzhouamerica">Read FJ Facts on Instagram</a>
+    </div>
+  </section>
+
+  <section class="section" id="reading-room">
+    <div class="shell">
+      <h2 class="sec-title">The reading room</h2>
+      <p class="sec-lede">
+        Journalism on the Fuzhounese-American experience, collected since the early 2000s: the boats and
+        the banquets, East Broadway and everywhere after.
+      </p>
+      {byTheme.map((t) => t.items.length > 0 && (
+        <div class="room-group">
+          <h3 class="room-theme">{t.label}</h3>
+          <div class="press-grid">
+            {t.items.map((m) => (
+              <a class="press-item" href={m.data.url}>
+                <span class="press-outlet">{m.data.outlet}</span>
+                <span class="press-title" set:html={`“${m.data.title}”`} />
+                {(m.data.author || m.data.year) && (
+                  <span class="press-meta">
+                    {m.data.author}{m.data.author && m.data.year ? ', ' : ''}{m.data.year}
+                  </span>
+                )}
+              </a>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="section cc-last">
+    <div class="shell">
+      <h2 class="sec-title">The longer shelf</h2>
+      <p class="sec-lede">Books and film, for when an article is not enough.</p>
+      <div class="press-grid">
+        {longerShelf.map((m) => (
+          <a class="press-item" href={m.data.url}>
+            <span class="press-outlet">{m.data.outlet}</span>
+            <span class="press-title" set:html={`“${m.data.title}”`} />
+            <span class="press-meta">
+              {m.data.kind === 'book' ? 'Book' : 'Documentary'} by {m.data.author}, {m.data.year}
+            </span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .head-link {
+    color: #fff;
+    font-weight: 700;
+  }
+  .room-group {
+    margin-bottom: 36px;
+  }
+  .room-group:last-child {
+    margin-bottom: 0;
+  }
+  .room-theme {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: 26px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--red-deep);
+    margin: 0 0 4px;
+  }
+</style>

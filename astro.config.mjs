@@ -16,5 +16,6 @@ export default defineConfig({
   redirects: {
     '/talktoomuch2024': '/conference/2024',
     '/talktoomuch2023': '/conference/2023',
+    '/talktoomuch': '/conference',
   },
 });

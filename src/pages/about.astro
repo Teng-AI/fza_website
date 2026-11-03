@@ -2,57 +2,82 @@
 import Base from '../layouts/Base.astro';
 
 const stats = [
-  { number: '8000+', caption: 'Active online members' },
+  { number: '10k+', caption: 'Members across all platforms' },
   { number: '100+', caption: 'Cities represented in our community' },
   { number: '58%', caption: 'Females' },
   { number: '93%', caption: 'Ages 18-34' },
-  { number: '1000+', caption: 'People gathered through events' },
+  { number: '2500+', caption: 'People gathered through events' },
   { number: '25+', caption: 'Countries represented in our community' },
+];
+
+const timeline = [
+  { year: '2019', text: 'Founded in Flushing, NY' },
+  { year: '2022', text: 'The first Talk Too Much: "Take-Out Only"' },
+  { year: '2023', text: '"Echoes From East Broadway"' },
+  { year: '2024', text: '"Navigating Fuzhounese Identity"' },
+  { year: '2026', text: 'First Light Film Festival debuts in Brooklyn' },
 ];
 ---
 
 <Base
   title="About | Fuzhou America"
-  description="Why Fuzhou America exists: our mission, vision, and progress. 8,000+ active members across 100+ cities and 25+ countries."
+  description="Why Fuzhou America exists: our mission, vision, and progress. 10k+ members across platforms, 100+ cities, 25+ countries."
   current="about"
 >
-  <header class="intro-header cc-subpage">
-    <h1 class="heading-jumbo">About Us</h1>
+  <header class="page-head">
+    <div class="shell page-head-inner">
+      <h1>About Us</h1>
+      <span class="page-head-cn" lang="zh">关于我们</span>
+    </div>
   </header>
 
   <section class="section">
-    <div class="container" style="text-align: center;">
-      <h2 class="section-heading" set:html={'We are the primary organization dedicated to f&#111;stering Fuzhou American history, culture, and community.'} />
+    <div class="shell">
+      <h2 class="sec-title" set:html={'We are the primary organization dedicated to f&#111;stering Fuzhou American history, culture, and community.'} />
     </div>
   </section>
 
   <section class="section">
-    <div class="container">
-      <div class="feature-row">
-        <div>
-          <h2 class="section-heading">Our Mission: Why We Exist</h2>
-          <p>
-            You know how the story goes: someone in your family &mdash; likely your father/mother, uncle/aunt, or
-            grandfather/grandmother &mdash; crossed the Atlantic by boat. Then, they opened a take-out restaurant in a
-            corner of this country. From the rural villages back in Fuzhou, they succeeded in carving out a space in
-            America.
-          </p>
-          <p>But with success came sacrifice.</p>
-          <p set:html={'N&#111;t only did our parents give up their personal freedoms, but many of us also grew up in socially disconnected environments, stranded between assimilating into American life and helping out at the family restaurant.'} />
-          <p>
-            We lacked a community that fully understood our struggles with family relations, social dynamics, and
-            personal identity. Fuzhou America (FZA) is that safe space.
-          </p>
-          <p>Here, at FZA, the next generation find peers who think like us, sound like us, and feel like us.</p>
-        </div>
+    <div class="shell story-grid">
+      <div class="prose">
+        <h2 class="sec-title">Our Mission: Why We Exist</h2>
+        <p>
+          You know how the story goes: someone in your family &mdash; likely your father/mother, uncle/aunt, or
+          grandfather/grandmother &mdash; crossed the Atlantic by boat. Then, they opened a take-out restaurant in a
+          corner of this country. From the rural villages back in Fuzhou, they succeeded in carving out a space in
+          America.
+        </p>
+        <p>But with success came sacrifice.</p>
+        <p set:html={'N&#111;t only did our parents give up their personal freedoms, but many of us also grew up in socially disconnected environments, stranded between assimilating into American life and helping out at the family restaurant.'} />
+        <p>
+          We lacked a community that fully understood our struggles with family relations, social dynamics, and
+          personal identity. Fuzhou America (FZA) is that safe space.
+        </p>
+        <p>Here, at FZA, the next generation find peers who think like us, sound like us, and feel like us.</p>
+      </div>
+      <figure class="story-photo">
         <img src="/images/about/mission.jpg" alt="Fuzhou America community gathering" loading="lazy" />
+      </figure>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
+      <h2 class="sec-title">Since 2019</h2>
+      <div class="timeline">
+        {timeline.map((t) => (
+          <div class="timeline-item">
+            <span class="timeline-year">{t.year}</span>
+            <p>{t.text}</p>
+          </div>
+        ))}
       </div>
     </div>
   </section>
 
   <section class="section">
-    <div class="container">
-      <h2 class="section-heading">Our Vision: What We're Building</h2>
+    <div class="shell">
+      <h2 class="sec-title">Our Vision: What We're Building</h2>
       <ul>
         <li>We have core programs serving high schoolers, college students, and young professionals.</li>
         <li>We have an extensive library of content and resources promoting our history and culture.</li>
@@ -70,11 +95,10 @@ const stats = [
     </div>
   </section>
 
-  <section class="section">
-    <div class="container" style="text-align: center;">
-      <div class="label">Our Progress</div>
-      <h2 class="section-heading">What We've Accomplished</h2>
-      <div class="stats-grid">
+  <section class="section cc-last">
+    <div class="shell">
+      <h2 class="sec-title">What We've Accomplished</h2>
+      <div class="stats-grid-page">
         {stats.map((s) => (
           <div>
             <div class="stat-number">{s.number}</div>
@@ -82,7 +106,40 @@ const stats = [
           </div>
         ))}
       </div>
+      <figure class="photo-band">
+        <img src="/images/about/lny-hall.jpg" alt="The whole hall at the Fuzhou America Lunar New Year Banquet, over a hundred members with arms raised" loading="lazy" />
+        <figcaption>The Lunar New Year Banquet, 2025.</figcaption>
+      </figure>
     </div>
   </section>
-
 </Base>
+
+<style>
+  .story-grid {
+    display: grid;
+    grid-template-columns: 7fr 5fr;
+    gap: clamp(28px, 5vw, 64px);
+    align-items: start;
+  }
+  .story-photo {
+    margin: 0;
+    background: #fff;
+    padding: 10px;
+    box-shadow: var(--shadow-warm);
+    position: sticky;
+    top: 24px;
+  }
+  .story-photo img {
+    width: 100%;
+    object-fit: cover;
+  }
+  @media (max-width: 860px) {
+    .story-grid {
+      grid-template-columns: 1fr;
+    }
+    .story-photo {
+      position: static;
+      max-width: 480px;
+    }
+  }
+</style>
