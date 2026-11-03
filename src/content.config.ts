@@ -29,6 +29,14 @@ const media = defineCollection({
     title: z.string(),
     url: z.string(),
     order: z.number().default(99),
+    // Reading-room fields (2026): articles group by theme on /culture;
+    // `featured` (1-6) picks and orders the homepage press section.
+    author: z.string().optional(),
+    year: z.number().optional(),
+    theme: z.enum(['immigration', 'history', 'chinatown', 'food', 'second-gen']).optional(),
+    kind: z.enum(['article', 'book', 'film']).default('article'),
+    publisher: z.string().optional(),
+    featured: z.number().optional(),
   }),
 });
 
@@ -39,7 +47,8 @@ const conferences = defineCollection({
   schema: z.object({
     year: z.number(),
     name: z.string(),
-    theme: z.string(),
+    // Optional: recent editions' themes land when confirmed
+    theme: z.string().optional(),
     presenterLine: z.string(),
     dateDisplay: z.string(),
     venueShort: z.string(),

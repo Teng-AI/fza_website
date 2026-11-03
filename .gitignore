@@ -36,6 +36,7 @@ HANDOVER*.md
 # ops files never published
 learnings*.md
 brainstorms/
+plans/
 
 # Cloud-sync conflict copies. Drive and iCloud append " 2", " 3" to a filename, which
 # defeats an exact-name ignore: `learnings.md` does not match `learnings 2.md`. Both exist

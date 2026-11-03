@@ -1,14 +1,12 @@
 ---
-import { getCollection } from 'astro:content';
-
-const conferences = (await getCollection('conferences')).sort((a, b) => b.data.year - a.data.year);
 const { current = '' } = Astro.props;
 ---
 
 <nav class="navigation">
-  <div class="container">
+  <div class="shell">
     <a href="/" class="nav-logo" aria-label="Fuzhou America home">
-      <img src="/images/logo.png" alt="Fuzhou America logo" />
+      <img src="/images/brand/logo-full-color.png" alt="Fuzhou America" width="241" height="44" />
+      <span class="nav-cn" lang="zh">福州青年会</span>
     </a>
     <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Toggle navigation menu" />
     <label for="nav-toggle" class="nav-toggle-label">
@@ -19,16 +17,10 @@ const { current = '' } = Astro.props;
     <div class="nav-menu">
       <a href="/" class="nav-link" aria-current={current === 'home' ? 'page' : undefined}>Home</a>
       <a href="/about" class="nav-link" aria-current={current === 'about' ? 'page' : undefined}>About</a>
-      <a href="/team" class="nav-link" aria-current={current === 'team' ? 'page' : undefined}>Team</a>
-      <a href="/support-us" class="nav-link" aria-current={current === 'support-us' ? 'page' : undefined}>Support Us</a>
-      <div class="nav-dropdown">
-        <span class="nav-link" tabindex="0">Conference</span>
-        <div class="nav-dropdown-list">
-          {conferences.map((c) => <a href={`/conference/${c.data.year}`} class="nav-link">{c.data.year}</a>)}
-        </div>
-      </div>
-      <a href="/contact" class="nav-link" aria-current={current === 'contact' ? 'page' : undefined}>Contact</a>
-      <a href="https://www.instagram.com/fuzhouamerica" class="button cc-nav">Follow Our Journey</a>
+      <a href="/conference" class="nav-link" aria-current={current === 'conference' ? 'page' : undefined}>Talk Too Much</a>
+      <a href="/programs" class="nav-link" aria-current={current === 'programs' ? 'page' : undefined}>Programs</a>
+      <a href="/culture" class="nav-link" aria-current={current === 'culture' ? 'page' : undefined}>Culture</a>
+      <a href="/support-us" class="btn btn-red btn-nav">Support Us</a>
     </div>
   </div>
 </nav>
