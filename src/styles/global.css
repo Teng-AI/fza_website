@@ -896,26 +896,44 @@ p:last-child {
 
 /* ---------- Timeline ---------- */
 
+/* Vertical by default: a wrapped horizontal row would strand dots off the line. */
 .timeline {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-  gap: 0;
-  border-top: 4px solid var(--red);
   margin-top: 32px;
+  border-left: 4px solid var(--red);
 }
 .timeline-item {
-  padding: 22px 18px 6px 0;
+  padding: 0 0 28px 28px;
   position: relative;
+}
+.timeline-item:last-child {
+  padding-bottom: 0;
 }
 .timeline-item::before {
   content: '';
   position: absolute;
-  top: -9px;
-  left: 0;
+  top: 8px;
+  left: -9px;
   width: 14px;
   height: 14px;
   border-radius: 50%;
   background: var(--red);
+}
+/* Wide screens: one row, every year on the line, however many entries there are */
+@media (min-width: 1000px) {
+  .timeline {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
+    border-left: 0;
+    border-top: 4px solid var(--red);
+  }
+  .timeline-item {
+    padding: 22px 18px 6px 0;
+  }
+  .timeline-item::before {
+    top: -9px;
+    left: 0;
+  }
 }
 .timeline-year {
   font-family: var(--display);
@@ -925,9 +943,15 @@ p:last-child {
 }
 .timeline-item p {
   margin-top: 6px;
-  font-size: 14px;
+  font-size: 15px;
   color: var(--ink-soft);
-  max-width: 24ch;
+  max-width: 36ch;
+}
+@media (min-width: 1000px) {
+  .timeline-item p {
+    font-size: 14px;
+    max-width: 24ch;
+  }
 }
 
 /* ---------- Wide photo band ---------- */
