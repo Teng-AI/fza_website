@@ -33,11 +33,14 @@ const timeline = [
   <section class="section">
     <div class="shell">
       <h2 class="sec-title" set:html={'We are the primary organization dedicated to f&#111;stering Fuzhou American history, culture, and community.'} />
+      <figure class="story-photo">
+        <img src="/images/about/lny-hall.jpg" alt="The whole hall at the Fuzhou America Lunar New Year Banquet, over a hundred members with arms raised" />
+      </figure>
     </div>
   </section>
 
   <section class="section">
-    <div class="shell story-grid">
+    <div class="shell">
       <div class="prose">
         <h2 class="sec-title">Our Mission: Why We Exist</h2>
         <p>
@@ -54,9 +57,6 @@ const timeline = [
         </p>
         <p>Here, at FZA, the next generation find peers who think like us, sound like us, and feel like us.</p>
       </div>
-      <figure class="story-photo">
-        <img src="/images/about/lny-hall.jpg" alt="The whole hall at the Fuzhou America Lunar New Year Banquet, over a hundred members with arms raised" loading="lazy" />
-      </figure>
     </div>
   </section>
 
@@ -90,31 +90,15 @@ const timeline = [
 </Base>
 
 <style>
-  .story-grid {
-    display: grid;
-    grid-template-columns: 7fr 5fr;
-    gap: clamp(28px, 5vw, 64px);
-    align-items: start;
-  }
+  /* Full shell width, uncropped: the photo's point is the whole room */
   .story-photo {
-    margin: 0;
+    margin: clamp(8px, 2vw, 16px) 0 0;
     background: #fff;
-    padding: 10px;
+    padding: clamp(6px, 1vw, 12px);
     box-shadow: var(--shadow-warm);
-    position: sticky;
-    top: 24px;
   }
   .story-photo img {
     width: 100%;
-    object-fit: cover;
-  }
-  @media (max-width: 860px) {
-    .story-grid {
-      grid-template-columns: 1fr;
-    }
-    .story-photo {
-      position: static;
-      max-width: 480px;
-    }
+    height: auto;
   }
 </style>
