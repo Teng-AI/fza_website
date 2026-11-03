@@ -7,5 +7,5 @@ author: Peter Kwong
 year: 1997
 theme: immigration
 kind: book
-summary: "The first major book on Fuzhounese migration to New York, told as a labor story."
+summary: "The first major book on migration from Fuzhou to New York, told as a labor story."
 ---

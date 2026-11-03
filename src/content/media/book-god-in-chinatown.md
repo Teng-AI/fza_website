@@ -7,5 +7,5 @@ author: Kenneth J. Guest
 year: 2003
 theme: chinatown
 kind: book
-summary: "An ethnography of the churches and temples Fuzhou immigrants built in Chinatown."
+summary: "An ethnography of the churches and temples Fuzhounese immigrants built in Chinatown."
 ---
