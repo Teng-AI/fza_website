@@ -1,0 +1,160 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+
+const editions = (await getCollection('conferences')).sort((a, b) => b.data.year - a.data.year);
+
+// Edition-card art per year.
+const cardArt: Record<number, string> = {
+  2026: '/images/home/ttm-card.jpg',
+  2025: '/images/conference/2025/recap-1.jpg',
+  2024: '/images/conference/2024/hero-bg.jpg',
+  2023: '/images/conference/2023/hero-bg.jpg',
+  2022: '/images/conference/2022/hero-bg.jpg',
+};
+---
+
+<Base
+  title="Talk Too Much | Fuzhou America"
+  description="Talk Too Much is Fuzhou America's annual conference, running since 2022: a day of talks, films, and community."
+  current="conference"
+  ogImage="/images/og/conference.jpg"
+>
+  <header class="hub-hero">
+    <img src="/images/conference/hub-hero.jpg" alt="A Chinatown street strung with garlands in warm light" fetchpriority="high" />
+    <div class="hub-hero-inner shell">
+      <p class="hub-presenter">Fuzhou America presents <span lang="zh" class="hub-cn">年度大会</span></p>
+      <h1>Talk Too<br />Much</h1>
+      <p class="hub-sub">
+        Our annual conference, running since 2022: a day of talks, films, panels, and a room
+        full of Fuzhou Americans.
+      </p>
+    </div>
+  </header>
+
+  <section class="section cc-last">
+    <div class="shell">
+      <h2 class="sec-title">The editions</h2>
+      <div class="editions">
+        {editions.map((e) => (
+          <a class="edition" href={`/conference/${e.data.year}`}>
+            {cardArt[e.data.year] ? (
+              <img src={cardArt[e.data.year]} alt="" loading="lazy" />
+            ) : (
+              <div class="edition-blank" aria-hidden="true"></div>
+            )}
+            <div class="edition-text">
+              <span class="edition-year">{e.data.year}</span>
+              <span class="edition-theme">{e.data.theme ?? 'Talk Too Much'}</span>
+              <span class="edition-meta">{e.data.dateDisplay} · {e.data.venueShort}</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .hub-hero {
+    position: relative;
+    background: var(--ink);
+    color: #fff;
+    overflow: hidden;
+  }
+  .hub-hero > img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.5;
+  }
+  .hub-hero-inner {
+    position: relative;
+    padding-block: clamp(64px, 9vw, 120px);
+  }
+  .hub-presenter {
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--fortune-cookie);
+    margin: 0;
+  }
+  .hub-cn {
+    font-family: var(--cn);
+    font-weight: 700;
+    letter-spacing: 5px;
+    margin-left: 10px;
+  }
+  .hub-hero h1 {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: clamp(72px, 11vw, 150px);
+    line-height: 0.9;
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+    margin: 10px 0 0;
+  }
+  .hub-sub {
+    margin: 20px 0 0;
+    max-width: 52ch;
+    font-size: 17px;
+    color: rgba(255, 255, 255, 0.94);
+  }
+  .editions {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 18px;
+  }
+  .edition {
+    display: block;
+    background: #fff;
+    padding: 8px 8px 16px;
+    box-shadow: var(--shadow-warm);
+    text-decoration: none;
+    transition: transform 200ms var(--ease);
+  }
+  .edition > img,
+  .edition-blank {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+  }
+  .edition-blank {
+    background: var(--ink);
+    background-image: radial-gradient(circle at 30% 20%, rgba(210, 49, 34, 0.55), transparent 60%);
+  }
+  .edition-text {
+    padding: 12px 8px 0;
+  }
+  .edition-year {
+    display: block;
+    font-family: var(--display);
+    font-size: 34px;
+    line-height: 1;
+    color: var(--red-deep);
+  }
+  .edition-theme {
+    display: block;
+    margin-top: 4px;
+    font-weight: 800;
+    font-size: 15px;
+    line-height: 1.3;
+  }
+  .edition-meta {
+    display: block;
+    margin-top: 6px;
+    font-size: 12.5px;
+    color: var(--ink-soft);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .edition:hover {
+      transform: translateY(-4px);
+    }
+    .edition:hover .edition-theme {
+      color: var(--red-deep);
+    }
+  }
+</style>

@@ -1,88 +1,268 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
+import Shelf from '../components/Shelf.astro';
+import { stats } from '../data/site';
 
-const media = (await getCollection('media')).sort((a, b) => a.data.order - b.data.order);
+// Homepage press: the six entries flagged `featured`, ordered; the full archive lives on /culture.
+const media = (await getCollection('media')).filter((m) => m.data.featured).sort((a, b) => (a.data.featured ?? 99) - (b.data.featured ?? 99));
 ---
 
-<Base title="Fuzhou America" current="home">
-  <header class="intro-header">
-    <div>
-      <h1 class="heading-jumbo">Welcome to Fuzhou America</h1>
+<Base title="Fuzhou America 福州青年会" current="home">
+  <!-- Poster hero on paper -->
+  <header class="hero">
+    <div class="shell hero-grid">
+      <div class="hero-copy">
+        <h1 class="hero-title">
+          <span class="line"><span>Fuzhou</span></span>
+          <span class="line"><span>America</span></span>
+        </h1>
+        <p class="hero-cn" lang="zh">福州青年会
+          <svg viewBox="0 0 200 12" preserveAspectRatio="none" aria-hidden="true"><path d="M3 8 C 40 4, 80 10, 120 6 S 185 7, 197 5" fill="none" stroke="#d23122" stroke-width="3.5" stroke-linecap="round"/></svg>
+        </p>
+        <p class="hero-sub">From Fuzhou to the world. Community, arts and history for Fuzhou Americans.</p>
+        <div class="hero-cta">
+          <a class="btn btn-red" href="https://www.instagram.com/fuzhouamerica">Follow Our Journey</a>
+          <a class="link-plain" href="/support-us">Support us</a>
+        </div>
+      </div>
+      <div class="hero-art">
+        <div class="hero-frame">
+          <img src="/images/home/community.jpg" alt="A full auditorium of Fuzhou America community members laughing together" width="1600" height="1066" fetchpriority="high" />
+        </div>
+      </div>
     </div>
   </header>
 
-  <section class="section">
-    <div class="container" style="text-align: center;">
-      <div class="label">What we believe in</div>
-      <h2 class="section-heading">Connecting Fuzhou Americans to socialize, network, and celebrate heritage</h2>
+  <!-- Stat band -->
+  <section class="stats" aria-label="Community by the numbers">
+    <div class="shell stats-grid">
+      {stats.map((s) => (
+        <div class="stat"><span class="stat-n">{s.number}</span><span class="stat-c">{s.label}</span></div>
+      ))}
     </div>
   </section>
 
+  <!-- Tentpoles -->
   <section class="section">
-    <div class="container">
-      <div class="feature-row">
-        <div>
-          <div class="label">Web</div>
-          <h2 class="section-heading">Online Community</h2>
-          <p>Join our Facebook Group &amp; Newsletter to connect with our community of 8000+ Fuzhou Americans</p>
-        </div>
-        <img src="/images/home/community.jpg" alt="Fuzhou America community members" loading="lazy" />
-      </div>
-      <div class="feature-row cc-flip">
-        <div>
-          <div class="label">Meetup</div>
-          <h2 class="section-heading">Social + Cultural Hangouts</h2>
-          <p>We meet every week from recurring socials to holiday parades, so our members can connect in-person</p>
-        </div>
-        <img src="/images/home/meetup.jpg" alt="Fuzhou America members at a social event" loading="lazy" />
-      </div>
-      <div class="feature-row">
-        <div>
-          <div class="label">Getaway</div>
-          <h2 class="section-heading">Inclusive Retreats</h2>
-          <p>We host multiple retreats each year for smaller group gatherings where people can bond over shared experiences and aspirations</p>
-        </div>
-        <img src="/images/home/retreats.jpg" alt="Fuzhou America members on a retreat" loading="lazy" />
+    <div class="shell">
+      <h2 class="sec-title">Tentpole events</h2>
+      <div class="poles">
+        <article class="pole">
+          <img src="/images/home/ttm-card.jpg" alt="Two volunteers holding the hand-drawn Talk Too Much 2026 postcards" loading="lazy" />
+          <div class="pole-text">
+            <h3>Talk Too Much</h3>
+            <p>Our annual conference, running since 2022. The 2026 edition filled DCTV in Manhattan with talks, films, and a packed house.</p>
+            <a class="link-light" href="/conference">See every edition</a>
+          </div>
+        </article>
+        <article class="pole">
+          <img src="/images/home/lny-card.jpg" alt="A banquet table raising glasses under the Happy Lunar New Year banner" loading="lazy" />
+          <div class="pole-text">
+            <h3>Lunar New Year Banquet</h3>
+            <p>Our banquet gathers the community each Spring Festival: a full room, a long menu, and everyone dressed in red.</p>
+            <a class="link-light" href="https://www.instagram.com/fuzhouamerica">Catch the next one</a>
+          </div>
+        </article>
       </div>
     </div>
   </section>
 
+  <!-- From our community -->
   <section class="section">
-    <div class="container">
-      <div class="label">news</div>
-      <h2 class="section-heading">Fuzhou Americans in the Media</h2>
-      <ul class="media-list">
+    <div class="shell">
+      <h2 class="sec-title">From our community</h2>
+      <Shelf />
+    </div>
+  </section>
+
+  <!-- All year round -->
+  <section class="section">
+    <div class="shell">
+      <h2 class="sec-title">All year round</h2>
+      <p class="sec-lede">
+        Mahjong socials, screenings, curated dinners, picnics, open mics: we meet on a regular basis
+        so our members can connect in person. <a href="/programs">See what we do</a>.
+      </p>
+      <div class="shell-wall wall">
+        <figure class="snap s1"><img src="/images/home/wall-mahjong.jpg" alt="Six members smiling around a mahjong table" loading="lazy" /></figure>
+        <figure class="snap s2"><img src="/images/home/wall-open-mic.jpg" alt="Mid-song laughter at our Chinatown open mic" loading="lazy" /></figure>
+        <figure class="snap s3"><img src="/images/home/wall-lny-sing.jpg" alt="A member in qipao singing with her arm raised at the banquet" loading="lazy" /></figure>
+        <figure class="snap s4"><img src="/images/home/wall-hoyu.jpg" alt="Three friends in festival sashes in Philadelphia" loading="lazy" /></figure>
+        <figure class="snap s5"><img src="/images/home/wall-lny-table.jpg" alt="A table of eight throwing peace signs at the banquet" loading="lazy" /></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- In the media -->
+  <section class="section cc-last">
+    <div class="shell">
+      <h2 class="sec-title">In the media</h2>
+      <div class="press-grid">
         {media.map((m) => (
-          <li>
-            <a href={m.data.url}>
-              <strong>{m.data.outlet}:</strong> <span set:html={`“${m.data.title}”`} />
-            </a>
-          </li>
+          <a class="press-item" href={m.data.url}>
+            <span class="press-outlet">{m.data.outlet}</span>
+            <span class="press-title" set:html={`“${m.data.title}”`} />
+          </a>
         ))}
-      </ul>
+      </div>
+      <p class="press-all"><a class="link-plain" href="/culture#reading-room">Read them all</a></p>
     </div>
   </section>
-
 </Base>
 
 <style>
-  .media-list {
-    list-style: none;
-    padding: 0;
-    margin: 24px 0 0;
+  .hero {
+    overflow: clip;
   }
-  .media-list li {
-    border-bottom: 1px solid #e6e6e6;
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 7fr 5fr;
+    gap: clamp(28px, 5vw, 72px);
+    align-items: center;
+    padding-block: clamp(44px, 6.5vw, 88px) clamp(16px, 2vw, 24px);
   }
-  .media-list a {
+  .hero-title {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: clamp(80px, 11vw, 158px);
+    line-height: 0.88;
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+    color: var(--ink);
+    margin: 0;
+  }
+  .hero-title .line {
     display: block;
-    padding: 18px 0;
-    text-decoration: none;
-    font-size: 18px;
-    transition: color 0.2s;
+    overflow: hidden;
   }
-  .media-list a:hover {
-    color: var(--fza-red);
+  .hero-title .line span {
+    display: inline-block;
+  }
+  .hero-title .line:last-child span {
+    color: var(--red);
+  }
+  .hero-cn {
+    position: relative;
+    display: inline-block;
+    font-family: var(--cn);
+    font-weight: 700;
+    font-size: clamp(18px, 2.2vw, 24px);
+    letter-spacing: 9px;
+    color: var(--ink-soft);
+    margin: 16px 0 0;
+  }
+  .hero-cn svg {
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    width: 100%;
+    height: 12px;
+  }
+  .hero-sub {
+    margin: 26px 0 0;
+    font-size: 18px;
+    max-width: 44ch;
+    color: var(--ink-soft);
+  }
+  .hero-cta {
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    flex-wrap: wrap;
+  }
+  .hero-frame {
+    position: relative;
+    aspect-ratio: 4 / 5;
+  }
+  .hero-frame::before {
+    content: '';
+    position: absolute;
+    inset: 18px -18px -18px 18px;
+    background: var(--red);
+  }
+  .hero-frame img {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-title .line span {
+      animation: rise 700ms var(--ease) backwards;
+    }
+    .hero-title .line:nth-child(2) span {
+      animation-delay: 90ms;
+    }
+    .hero-cn,
+    .hero-sub,
+    .hero-cta {
+      animation: fade-up 600ms var(--ease) 240ms backwards;
+    }
+    .hero-frame {
+      animation: fade-up 700ms var(--ease) 160ms backwards;
+    }
+  }
+  @keyframes rise {
+    from {
+      transform: translateY(110%);
+    }
+  }
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(14px);
+    }
+  }
+
+  /* Snapshot tilts (straightened on hover by the global .snap rule) */
+  .s1 { width: 30%; --tilt: -2deg; }
+  .s1 img { aspect-ratio: 4 / 3; }
+  .s2 { width: 26%; --tilt: 1.5deg; margin-top: 34px; }
+  .s2 img { aspect-ratio: 4 / 3; }
+  .s3 { width: 19%; --tilt: -1deg; }
+  .s3 img { aspect-ratio: 3 / 4; }
+  .s4 { width: 27%; --tilt: 2deg; margin-top: 18px; }
+  .s4 img { aspect-ratio: 4 / 3; }
+  .s5 { width: 24%; --tilt: -1.5deg; margin-top: -40px; margin-left: 6%; }
+  .s5 img { aspect-ratio: 4 / 3; }
+
+  .press-all {
+    margin-top: 22px;
+  }
+
+  @media (max-width: 920px) {
+    .hero-grid {
+      grid-template-columns: 1fr;
+      gap: 40px;
+      padding-block: 40px 0;
+    }
+    .hero-title {
+      font-size: clamp(72px, 16.5vw, 116px);
+    }
+    .hero-frame {
+      aspect-ratio: 4 / 3;
+    }
+    .hero-frame::before {
+      inset: 14px -14px -14px 14px;
+    }
+    .wall {
+      gap: 18px;
+    }
+    .s1, .s2, .s4 { width: 47%; margin-top: 0; }
+    .s3 { width: 34%; }
+    .s5 { width: 44%; margin: 0; }
+  }
+  @media (max-width: 600px) {
+    .s1, .s2, .s3, .s4, .s5 { width: 100%; margin: 0; }
+    .s3 { max-width: 70%; align-self: center; }
+  }
+  @media (max-width: 860px) {
+    .hero-cta .link-plain {
+      border: 2px solid var(--ink);
+      padding: 13px 24px;
+    }
   }
 </style>

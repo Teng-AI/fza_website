@@ -1,0 +1,18 @@
+---
+// "From our community": works the community makes and FZA champions, with maker credits.
+// Shown on the homepage and /culture. Each project is a file in src/content/projects/;
+// `order` sets the sequence.
+import { getProjects } from '../lib/content';
+
+const works = await getProjects();
+---
+
+<div class="shelf">
+  {works.map((w) => (
+    <a class="tile" href={w.data.url}>
+      <span class="tile-name">{w.data.name}</span>
+      <span class="tile-desc">{w.data.desc}</span>
+      <span class="tile-credit">{w.data.credit}</span>
+    </a>
+  ))}
+</div>

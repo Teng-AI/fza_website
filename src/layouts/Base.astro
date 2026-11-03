@@ -2,12 +2,15 @@
 import '../styles/global.css';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
+import { stat } from '../data/site';
 
 const {
   title,
-  description = 'Fuzhou America connects Fuzhou Americans to socialize, network, and celebrate heritage. A 501(c)(3) nonprofit with 8,000+ community members.',
+  description = `Community, arts and history for Fuzhou Americans. From Fuzhou to the world: a 501(c)(3) nonprofit with ${stat('members')} members across platforms.`,
   current = '',
   ogImage = '/og-image.png',
+  // Extra JSON-LD objects for this page, rendered after the site-wide organization schema
+  schema = [],
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -17,7 +20,7 @@ const orgSchema = {
   '@context': 'https://schema.org',
   '@type': 'NonprofitOrganization',
   name: 'Fuzhou America',
-  alternateName: 'FZA',
+  alternateName: ['FZA', '福州青年会'],
   url: 'https://www.fuzhouamerica.org',
   logo: 'https://www.fuzhouamerica.org/images/brand/logo-mark-color.png',
   email: 'info@fuzhouamerica.org',
@@ -46,8 +49,10 @@ const orgSchema = {
     <link rel="canonical" href={canonicalURL} />
     <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    <meta name="theme-color" content="#d23122" />
+    <meta name="theme-color" content="#f2f0e9" />
     <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/bebas-neue-400.woff2" crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/montserrat-var.woff2" crossorigin />
 
     <meta property="og:site_name" content="Fuzhou America" />
     <meta property="og:type" content="website" />
@@ -63,7 +68,10 @@ const orgSchema = {
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImageURL} />
 
-    <script is:inline type="application/ld+json" set:html={JSON.stringify(orgSchema)} />
+    {[orgSchema, ...schema].map((s) => (
+      // Escape "<" so no content string can close the script tag early
+      <script is:inline type="application/ld+json" set:html={JSON.stringify(s).replace(/</g, '\\u003c')} />
+    ))}
   </head>
   <body>
     <Nav current={current} />

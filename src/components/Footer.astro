@@ -1,55 +1,60 @@
 ---
-// beehiiv subscribe form (dashboard: Grow -> Subscribe Forms).
-// Clear this to fall back to a Subscribe button linking to the hosted page.
-const BEEHIIV_FORM_ID = 'e2fb6eff-997e-49e0-9395-dae1bed1cd85';
+// Signups go to the hosted beehiiv page; an inline embed made the third door
+// taller than its siblings, so the door is a plain link like the others.
 const year = new Date().getFullYear();
 ---
 
-<footer class="footer">
-  <div class="container footer-cta">
-    <h2>Join Our Community</h2>
-    <p>Share your story with us &mdash; we want to hear from you!</p>
-    {
-      BEEHIIV_FORM_ID ? (
-        <div class="newsletter-embed">
-          <script async is:inline src="https://subscribe-forms.beehiiv.com/v3/loader.js" data-beehiiv-form={BEEHIIV_FORM_ID} />
-          <noscript>
-            <a href="https://fuzhou.beehiiv.com/subscribe" class="button cc-subscribe">Subscribe to our newsletter</a>
-          </noscript>
-        </div>
-      ) : (
-        <a href="https://fuzhou.beehiiv.com/subscribe" class="button cc-subscribe">Subscribe to our newsletter</a>
-      )
-    }
-    <div class="footer-socials">
-      <a href="https://www.facebook.com/groups/subtlefuzhoutraits" aria-label="Facebook group">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M7 10v4h3v7h4v-7h3l1 -4h-4v-2a1 1 0 0 1 1 -1h3v-4h-3a5 5 0 0 0 -5 5v2h-3" />
-        </svg>
-      </a>
-      <a href="https://www.instagram.com/fuzhouamerica" aria-label="Instagram">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="4" y="4" width="16" height="16" rx="4" />
-          <circle cx="12" cy="12" r="3" />
-          <path d="M16.5 7.5v.01" />
-        </svg>
-      </a>
-      <a href="mailto:info@fuzhouamerica.org" aria-label="Email us">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" />
-          <path d="M3 7l9 6l9 -6" />
-        </svg>
-      </a>
+<footer>
+  <section class="footer-join">
+    <div class="shell footer-join-inner">
+      <h2>Join Our Community</h2>
+      <p class="join-sub">Share your story with us. We want to hear from you!</p>
+      <div class="doors">
+        <a class="door" href="https://www.instagram.com/fuzhouamerica">
+          <span class="door-name">@fuzhouamerica</span>
+          <span class="door-desc">Everything we host and make, announced here first.</span>
+        </a>
+        <a class="door" href="https://www.facebook.com/groups/subtlefuzhoutraits">
+          <span class="door-name">Subtle Fuzhou Traits</span>
+          <span class="door-desc">Our Facebook group, where the community talks every day.</span>
+        </a>
+        <a class="door" href="https://fuzhou.beehiiv.com/subscribe">
+          <span class="door-name">Event announcements</span>
+          <span class="door-desc">We only email when it is big: think TTM and Lunar New Year.</span>
+        </a>
+      </div>
+      <div class="footer-socials">
+        <a href="https://www.facebook.com/groups/subtlefuzhoutraits" aria-label="Facebook group">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M7 10v4h3v7h4v-7h3l1 -4h-4v-2a1 1 0 0 1 1 -1h3v-4h-3a5 5 0 0 0 -5 5v2h-3" />
+          </svg>
+        </a>
+        <a href="https://www.instagram.com/fuzhouamerica" aria-label="Instagram">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="4" y="4" width="16" height="16" rx="4" />
+            <circle cx="12" cy="12" r="3" />
+            <path d="M16.5 7.5v.01" />
+          </svg>
+        </a>
+        <a href="mailto:info@fuzhouamerica.org" aria-label="Email us">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" />
+            <path d="M3 7l9 6l9 -6" />
+          </svg>
+        </a>
+      </div>
+      <p class="footer-note">Fuzhou America <span lang="zh" class="lang-cn">福州青年会</span> is a 501(c)(3) nonprofit community founded in 2019, based in Flushing, NY.</p>
     </div>
-  </div>
-  <div class="container footer-bottom">
-    <div class="footer-links">
-      <a href="/about">About</a>
-      <a href="/team">Team</a>
-      <a href="/support-us">Support Us</a>
-      <a href="/contact">Contact</a>
-      <a href="/disclosures">Donor Disclosures</a>
+  </section>
+  <div class="footer-bar">
+    <div class="shell">
+      <nav class="footer-links" aria-label="Footer">
+        <a href="/team">Team</a>
+        <a href="/contact">Contact</a>
+        <a href="/zh" lang="zh">给爸妈看的一页</a>
+        <a href="/disclosures">Donor Disclosures</a>
+      </nav>
+      <p class="footer-copy">&copy; {year} Fuzhou America <span lang="zh" class="lang-cn">福州青年会</span></p>
     </div>
-    <p class="footer-note">&copy; {year} Fuzhou America. A 501(c)(3) nonprofit organization.</p>
   </div>
 </footer>

@@ -13,14 +13,17 @@ const advisory = team.filter((m) => m.data.board === 'advisory').sort(byOrder);
   description="Meet the Fuzhou America leadership and advisory board."
   current="team"
 >
-  <header class="intro-header cc-subpage">
-    <h1 class="heading-jumbo">Meet the Team</h1>
+  <header class="page-head">
+    <div class="shell page-head-inner">
+      <h1>Meet the Team</h1>
+      <span class="page-head-cn" lang="zh">团队</span>
+    </div>
   </header>
 
   <section class="section">
-    <div class="container">
-      <div class="label">Leadership</div>
-      <h2 class="section-heading">We lay out the vision for the organization</h2>
+    <div class="shell">
+      <h2 class="sec-title">Leadership</h2>
+      <p class="sec-lede">We lay out the vision for the organization.</p>
       <div class="people-grid">
         {executive.map((m) => (
           <div class="person-card">
@@ -35,10 +38,10 @@ const advisory = team.filter((m) => m.data.board === 'advisory').sort(byOrder);
     </div>
   </section>
 
-  <section class="section">
-    <div class="container">
-      <div class="label">Advisory Board</div>
-      <h2 class="section-heading">Our advisors carry expertise across industries</h2>
+  <section class="section cc-last">
+    <div class="shell">
+      <h2 class="sec-title">Advisory Board</h2>
+      <p class="sec-lede">Our advisors carry expertise across industries.</p>
       <div class="people-grid">
         {advisory.map((m) => (
           <div class="person-card">
@@ -52,5 +55,4 @@ const advisory = team.filter((m) => m.data.board === 'advisory').sort(byOrder);
       </div>
     </div>
   </section>
-
 </Base>

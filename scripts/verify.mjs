@@ -50,6 +50,11 @@ for (const file of htmlFiles) {
     ...html.matchAll(/url\('([^']+)'\)/g),
   ].map((m) => m[1]);
 
+  // Link-preview images are absolute site URLs in meta tags; check they resolve too.
+  for (const m of html.matchAll(/(?:og|twitter):image" content="https:\/\/www\.fuzhouamerica\.org([^"]+)"/g)) {
+    refs.push(m[1]);
+  }
+
   for (const ref of refs) {
     if (/^(https?:|mailto:|#|data:)/.test(ref)) continue;
     if (!resolvable(ref)) {
@@ -57,6 +62,18 @@ for (const file of htmlFiles) {
       errors++;
     }
   }
+}
+
+// 3. Every reading-room entry renders on /culture (an article with no matching theme would
+//    otherwise drop off the page without an error).
+const mediaCount = readdirSync('src/content/media').filter((n) => n.endsWith('.md')).length;
+const culturePath = join(DIST, 'culture', 'index.html');
+const renderedCount = existsSync(culturePath)
+  ? (readFileSync(culturePath, 'utf8').match(/class="press-item[ "]/g) ?? []).length
+  : 0;
+if (renderedCount !== mediaCount) {
+  console.error(`READING ROOM: ${mediaCount} media files but ${renderedCount} entries on /culture`);
+  errors++;
 }
 
 console.log(`Checked ${htmlFiles.length} pages.`);

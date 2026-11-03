@@ -1,4 +1,5 @@
 ---
+import { existsSync } from 'node:fs';
 import { getCollection, render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 
@@ -13,10 +14,19 @@ export async function getStaticPaths() {
 const { entry } = Astro.props;
 const c = entry.data;
 const { Content } = await render(entry);
-const pageTitle = `${c.name}: ${c.theme} | Fuzhou America`;
+// The hero shows `name` in caps; titles and descriptions read better in title case.
+const titleCase = (s: string) => s.toLowerCase().replace(/(^|[\s-])\w/g, (m) => m.toUpperCase());
+// 2022's theme is also its name ("Take-Out Only"), so only show a theme that adds something.
+const theme = c.theme && c.theme.toLowerCase() !== c.name.toLowerCase() ? c.theme : undefined;
+const label = `${titleCase(c.name)} ${c.year}${theme ? `: ${theme}` : ''}`;
+const pageTitle = `${label} | Fuzhou America`;
+const pageDesc = `${label}, Fuzhou America's annual conference, on ${c.dateDisplay} at ${c.venueShort}.`;
+// Per-edition preview crop if one was made (public/images/og/conference-<year>.jpg); else the site default.
+const ogCandidate = `/images/og/conference-${c.year}.jpg`;
+const ogImage = existsSync(`public${ogCandidate}`) ? ogCandidate : undefined;
 ---
 
-<Base title={pageTitle} description={`${c.name} ${c.year}: ${c.theme}, the Fuzhou America annual conference.`}>
+<Base title={pageTitle} description={pageDesc} current="conference" ogImage={ogImage}>
   <header class="conf-hero" style={c.heroImage ? `background-image: url('${c.heroImage}')` : ''}>
     <div class="conf-hero-inner">
       <p class="conf-hero-meta">
@@ -26,16 +36,16 @@ const pageTitle = `${c.name}: ${c.theme} | Fuzhou America`;
       <p class="conf-presenter">{c.presenterLine}</p>
       <h1>
         {c.name}
-        <span class="conf-theme">{c.theme}</span>
+        {theme && <span class="conf-theme">{theme}</span>}
       </h1>
       {c.pastEventNote && <p class="past-note">{c.pastEventNote}</p>}
-      {c.ticketUrl && <a href={c.ticketUrl} class="button cc-light">Buy Tickets</a>}
+      {c.ticketUrl && <a href={c.ticketUrl} class="btn btn-light">Buy Tickets</a>}
     </div>
   </header>
 
   <section class="section" id="about">
-    <div class="container">
-      <h2 class="section-heading">OUR STORY</h2>
+    <div class="shell">
+      <h2 class="sec-title">OUR STORY</h2>
       <div class="conf-story">
         <Content />
       </div>
@@ -44,8 +54,8 @@ const pageTitle = `${c.name}: ${c.theme} | Fuzhou America`;
 
   {c.whyAttend && (
     <section class="section conf-why" id="why-attend">
-      <div class="container">
-        <h2 class="section-heading">WHY ATTEND</h2>
+      <div class="shell">
+        <h2 class="sec-title">WHY ATTEND</h2>
         <p>{c.whyAttend.intro}</p>
         <div class="why-grid">
           {c.whyAttend.cards.map((card) => (
@@ -62,8 +72,8 @@ const pageTitle = `${c.name}: ${c.theme} | Fuzhou America`;
 
   {c.recap && (
     <section class="section">
-      <div class="container">
-        <h2 class="section-heading">{c.recap.title}</h2>
+      <div class="shell">
+        <h2 class="sec-title">{c.recap.title}</h2>
         {c.recap.videoId && (
           <div class="video-embed">
             <iframe
@@ -89,8 +99,8 @@ const pageTitle = `${c.name}: ${c.theme} | Fuzhou America`;
 
   {c.community && (
     <section class="section" id="community">
-      <div class="container">
-        <h2 class="section-heading">Our Community</h2>
+      <div class="shell">
+        <h2 class="sec-title">Our Community</h2>
         <p>{c.community.text}</p>
         {c.community.photos.length > 0 && (
           <div class="gallery">
@@ -112,8 +122,8 @@ const pageTitle = `${c.name}: ${c.theme} | Fuzhou America`;
 
   {(c.scheduleImage || c.agenda) && (
     <section class="section" id="schedule">
-      <div class="container">
-        <h2 class="section-heading">Schedule</h2>
+      <div class="shell">
+        <h2 class="sec-title">Schedule</h2>
         {c.agenda && (
           <div class="agenda">
             <p class="agenda-when">
@@ -137,8 +147,8 @@ const pageTitle = `${c.name}: ${c.theme} | Fuzhou America`;
 
   {c.speakers && (
     <section class="section" id="speakers">
-      <div class="container">
-        <h2 class="section-heading">Speakers</h2>
+      <div class="shell">
+        <h2 class="sec-title">Speakers</h2>
         {c.speakers.intro && <p>{c.speakers.intro}</p>}
         <div class="people-grid">
           {c.speakers.people.map((p) => (
@@ -168,8 +178,8 @@ const pageTitle = `${c.name}: ${c.theme} | Fuzhou America`;
 
   {c.mcs && (
     <section class="section">
-      <div class="container">
-        <h2 class="section-heading">MCs</h2>
+      <div class="shell">
+        <h2 class="sec-title">MCs</h2>
         {c.mcs.intro && <p>{c.mcs.intro}</p>}
         <div class="people-grid">
           {c.mcs.people.map((p) => (
@@ -198,8 +208,8 @@ const pageTitle = `${c.name}: ${c.theme} | Fuzhou America`;
 
   {c.conferenceTeam && (
     <section class="section">
-      <div class="container">
-        <h2 class="section-heading">Conference Team</h2>
+      <div class="shell">
+        <h2 class="sec-title">Conference Team</h2>
         {c.conferenceTeam.intro && <p>{c.conferenceTeam.intro}</p>}
         <div class="people-grid">
           {c.conferenceTeam.people.map((p) => (
@@ -228,8 +238,8 @@ const pageTitle = `${c.name}: ${c.theme} | Fuzhou America`;
 
   {c.venue && (
     <section class="section">
-      <div class="container">
-        <h2 class="section-heading">The Venue</h2>
+      <div class="shell">
+        <h2 class="sec-title">The Venue</h2>
         <p set:html={c.venue.text} />
         {c.venue.links.length > 0 && (
           <p>
@@ -248,8 +258,8 @@ const pageTitle = `${c.name}: ${c.theme} | Fuzhou America`;
 
   {c.sponsorsImage && (
     <section class="section">
-      <div class="container">
-        <h2 class="section-heading">Past Sponsors</h2>
+      <div class="shell">
+        <h2 class="sec-title">Past Sponsors</h2>
         <img src={c.sponsorsImage} alt={`${c.name} ${c.year} sponsors`} loading="lazy" />
         {c.sponsorsNote && <p set:html={c.sponsorsNote} />}
       </div>
@@ -258,8 +268,8 @@ const pageTitle = `${c.name}: ${c.theme} | Fuzhou America`;
 
   {c.faqs.length > 0 && (
     <section class="section" id="faqs">
-      <div class="container">
-        <h2 class="section-heading">FAQs</h2>
+      <div class="shell">
+        <h2 class="sec-title">FAQs</h2>
         {c.faqs.map((f) => (
           <details class="faq-item">
             <summary>{f.q}</summary>
@@ -351,7 +361,7 @@ const pageTitle = `${c.name}: ${c.theme} | Fuzhou America`;
     font-weight: 400;
     letter-spacing: 2px;
     font-size: 26px;
-    color: var(--fza-red);
+    color: var(--red-deep);
   }
   .agenda-when {
     font-size: 18px;
@@ -366,7 +376,7 @@ const pageTitle = `${c.name}: ${c.theme} | Fuzhou America`;
     justify-content: space-between;
     gap: 24px;
     padding: 12px 0;
-    border-bottom: 1px solid #e6e6e6;
+    border-bottom: 1px solid var(--hair);
   }
   .agenda-list li span {
     text-align: right;

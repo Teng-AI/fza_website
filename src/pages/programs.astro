@@ -1,0 +1,170 @@
+---
+import Base from '../layouts/Base.astro';
+
+// Event types, not a calendar: dates live on Instagram, so this page never goes stale.
+// Ordered by the most recent occurrence (Nov 2026); each `ig` links one real example post.
+const types = [
+  {
+    img: '/images/programs/art-screening.jpg',
+    alt: 'The audience at a Fuzhou America film screening',
+    name: 'Art & film screenings',
+    desc: 'Screenings and Q&As with Fuzhounese filmmakers, performances, studio visits.',
+    ig: 'https://www.instagram.com/p/Dbl4w-1le_N/',
+  },
+  {
+    img: '/images/home/wall-mahjong.jpg',
+    alt: 'Six members smiling around a mahjong table',
+    name: 'Mahjong socials',
+    desc: 'Tables on the sidewalk or in the park, all skill levels: at the 2026 social, most players were first-timers.',
+    ig: 'https://www.instagram.com/p/Db-_S4AlWtV/',
+  },
+  {
+    img: '/images/home/wall-open-mic.jpg',
+    alt: 'Mid-song laughter at our Chinatown open mic',
+    name: 'Open mics',
+    desc: 'Open mic nights on Chinatown plazas: songs, stories, first attempts.',
+    ig: 'https://www.instagram.com/p/Dajs-gcDfFu/',
+  },
+  {
+    img: '/images/programs/nin-hao.jpg',
+    alt: 'The table at a Nin Hao dinner in Brooklyn',
+    name: 'Curated dinners',
+    desc: 'Set dinners like our Nin Hao series in Brooklyn, menus built around Fujianese cooking.',
+    ig: 'https://www.instagram.com/p/DMY9GcbtqHH/',
+  },
+  {
+    img: '/images/home/wall-hoyu.jpg',
+    alt: 'Three friends in festival sashes in Philadelphia',
+    name: 'Hoyu Festival trip',
+    desc: "Our annual spring trip to Philadelphia's Hoyu Festival, every year since 2023.",
+    ig: 'https://www.instagram.com/p/DWw66m3EulY/',
+  },
+  {
+    img: '/images/programs/fuzhou-meetup.jpg',
+    alt: 'Members gathered at our first event in Fuzhou',
+    name: 'Fuzhou, China meetup',
+    desc: 'After six years, our first event in Fuzhou itself, winter 2026.',
+    ig: 'https://www.instagram.com/p/DUbjuz3kvXU/',
+  },
+  {
+    img: '/images/programs/lecture.jpg',
+    alt: 'A full room listening to a talk at 47 East Broadway',
+    name: 'Talks & lectures',
+    desc: 'Talks at 47 East Broadway, from the history of the Golden Venture to Eastern wellness.',
+    ig: 'https://www.instagram.com/p/DNmAj4UO6gs/',
+  },
+  {
+    img: '/images/programs/field-day.jpg',
+    alt: 'Members at the cross-chapter Field Day',
+    name: 'City chapter socials',
+    desc: 'Chapter meetups from Boston to the Bay Area, and a cross-chapter Field Day.',
+    ig: 'https://www.instagram.com/p/DAji6P0S-ii/',
+  },
+  {
+    img: '/images/programs/picnic.jpg',
+    alt: 'Members on picnic blankets in the park',
+    name: 'Picnic socials',
+    desc: 'Blankets and games in Central Park and Gantry Plaza.',
+    ig: 'https://www.instagram.com/p/CUA-CwflLxk/',
+  },
+  {
+    img: '/images/programs/parade.jpg',
+    alt: 'The Fuzhou America float at the AAPI Heritage Parade',
+    name: 'Parade floats',
+    desc: 'Our first float rolled in the AAPI Heritage Parade in 2024.',
+    ig: 'https://www.instagram.com/p/C7PUcjlv3tZ/',
+  },
+];
+---
+
+<Base
+  title="Programs | Fuzhou America"
+  description="What Fuzhou America hosts: screenings, mahjong socials, open mics, curated dinners, lectures, picnics, and meetups from New York to Fuzhou."
+  current="programs"
+>
+  <header class="page-head">
+    <div class="shell page-head-inner">
+      <h1>Programs</h1>
+      <span class="page-head-cn" lang="zh">活动</span>
+      <p class="page-head-note">
+        Here's what we host. For dates, follow
+        <a href="https://www.instagram.com/fuzhouamerica" class="head-link">@fuzhouamerica</a>.
+      </p>
+    </div>
+  </header>
+
+  <section class="section cc-last">
+    <div class="shell">
+      <h2 class="sec-title">What we host</h2>
+      <div class="type-grid">
+        {types.map((t) => (
+          <article class="type-card">
+            <img src={t.img} alt={t.alt} loading="lazy" />
+            <div class="type-text">
+              <h3>{t.name}</h3>
+              <p>{t.desc}</p>
+              {t.ig && <a class="type-ig" href={t.ig}>See on Instagram</a>}
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .head-link {
+    color: #fff;
+    font-weight: 700;
+  }
+  .type-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(255px, 1fr));
+    gap: 18px;
+    align-items: start;
+  }
+  .type-card {
+    background: #fff;
+    border: 1px solid var(--hair);
+    border-top: 4px solid var(--red);
+  }
+  .type-card img {
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+  }
+  .type-text {
+    padding: 16px 18px 18px;
+  }
+  .type-card h3 {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: 26px;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    margin: 0;
+  }
+  .type-card p {
+    margin: 6px 0 0;
+    font-size: 14px;
+    color: var(--ink-soft);
+  }
+  .type-ig {
+    display: inline-block;
+    margin-top: 12px;
+    font-size: 11.5px;
+    font-weight: 800;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--red-deep);
+    border-bottom: 2px solid var(--red);
+    padding-bottom: 2px;
+    touch-action: manipulation;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .type-ig:hover {
+      color: var(--ink);
+    }
+  }
+</style>

@@ -1,5 +1,6 @@
 import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
+import { themeKeys } from './data/site';
 
 const person = z.object({
   name: z.string(),
@@ -24,10 +25,47 @@ const team = defineCollection({
 
 const media = defineCollection({
   loader: glob({ pattern: '*.md', base: './src/content/media' }),
+  schema: z
+    .object({
+      outlet: z.string(),
+      title: z.string(),
+      url: z.string(),
+      order: z.number().default(99),
+      // Reading-room fields (2026): articles group by theme on /culture;
+      // `featured` (1-6) picks and orders the homepage press section.
+      author: z.string().optional(),
+      year: z.number().optional(),
+      theme: z.enum(themeKeys).optional(),
+      kind: z.enum(['article', 'book', 'film']).default('article'),
+      publisher: z.string().optional(),
+      featured: z.number().optional(),
+      // One line in FZA's words on what the piece covers; shown under the title on /culture.
+      summary: z.string().optional(),
+    })
+    // /culture lists articles by theme, so an article without one would silently vanish.
+    .refine((m) => m.kind !== 'article' || m.theme !== undefined, {
+      message: 'Articles need a theme (see readingThemes in src/data/site.ts)',
+      path: ['theme'],
+    })
+    // Books and films print "Book by <author>, <year>".
+    .refine((m) => m.kind === 'article' || (m.author !== undefined && m.year !== undefined), {
+      message: 'Books and films need an author and a year',
+      path: ['author'],
+    }),
+});
+
+// Projects the community makes and FZA champions: the "From our community" tiles
+// on the homepage and /culture.
+const projects = defineCollection({
+  loader: glob({ pattern: '*.md', base: './src/content/projects' }),
   schema: z.object({
-    outlet: z.string(),
-    title: z.string(),
+    name: z.string(),
     url: z.string(),
+    desc: z.string(),
+    // Display line under the tile, e.g. "By Allen Cao & Jess Eng"
+    credit: z.string(),
+    // The makers' names, for structured data
+    creators: z.array(z.string()).default([]),
     order: z.number().default(99),
   }),
 });
@@ -39,7 +77,8 @@ const conferences = defineCollection({
   schema: z.object({
     year: z.number(),
     name: z.string(),
-    theme: z.string(),
+    // Optional: recent editions' themes land when confirmed
+    theme: z.string().optional(),
     presenterLine: z.string(),
     dateDisplay: z.string(),
     venueShort: z.string(),
@@ -90,4 +129,4 @@ const conferences = defineCollection({
   }),
 });
 
-export const collections = { team, media, conferences };
+export const collections = { team, media, projects, conferences };
