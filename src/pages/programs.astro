@@ -1,25 +1,38 @@
 ---
 import Base from '../layouts/Base.astro';
 
-// Recurring formats, not a calendar: dates live on Instagram, so this page never goes stale.
-const formats = [
+// Event types, not a calendar: dates live on Instagram, so this page never goes stale.
+// `ig` slots hold exemplar post links once confirmed.
+const types = [
   {
     img: '/images/home/wall-mahjong.jpg',
     alt: 'Six members smiling around a mahjong table',
-    name: 'Mahjong Socials',
+    name: 'Mahjong socials',
     desc: 'Tables on the sidewalk or in the park, all skill levels, somebody always teaching.',
   },
   {
     img: '/images/home/wall-open-mic.jpg',
     alt: 'Mid-song laughter at our Chinatown open mic',
-    name: 'Open mics & screenings',
-    desc: 'Film nights, panels, and open mics in Chinatown rooms, from DCTV to Pell Street.',
+    name: 'Open mics',
+    desc: 'Songs, stories, and first attempts, in front of the friendliest room in Chinatown.',
+  },
+  {
+    name: 'Art events & film screenings',
+    desc: 'Gallery nights, screenings, and panels, from DCTV to Pell Street.',
   },
   {
     img: '/images/community/community-9.jpg',
     alt: 'A long restaurant table under a fortune sign and red lantern',
-    name: 'Restaurant meetups',
-    desc: 'Long tables at the places our families built. Come hungry, leave with new friends.',
+    name: 'Curated dinners',
+    desc: 'Small-group dinners at the places our families built.',
+  },
+  {
+    name: 'Picnic socials',
+    desc: 'Blankets and snacks in Central Park and Gantry Plaza, when the weather cooperates.',
+  },
+  {
+    name: 'Happy hour socials',
+    desc: 'After-work rounds for meeting new faces without a program.',
   },
   {
     img: '/images/home/retreats.jpg',
@@ -27,12 +40,16 @@ const formats = [
     name: 'Retreats',
     desc: 'Smaller trips through the year, where people bond over shared experiences.',
   },
+  {
+    name: 'Fuzhou, China meetup',
+    desc: 'When members are back home, we gather in Fuzhou itself.',
+  },
 ];
 ---
 
 <Base
   title="Programs | Fuzhou America"
-  description="Fuzhou America's year-round programming: mahjong socials, screenings and open mics, restaurant meetups, retreats, the First Light Film Festival, and the Fuzhou College Coalition."
+  description="What Fuzhou America hosts: mahjong socials, open mics, art events and screenings, curated dinners, picnics, happy hours, retreats, and meetups from New York to Fuzhou."
   current="programs"
 >
   <header class="page-head">
@@ -40,48 +57,26 @@ const formats = [
       <h1>Programs</h1>
       <span class="page-head-cn" lang="zh">活动</span>
       <p class="page-head-note">
-        We meet every week. Dates and signups are announced on
-        <a href="https://www.instagram.com/fuzhouamerica" class="head-link">@fuzhouamerica</a>; these are
-        the formats to look out for.
+        We meet on a regular basis. Dates and signups are announced on
+        <a href="https://www.instagram.com/fuzhouamerica" class="head-link">@fuzhouamerica</a>; here is
+        the kind of thing to expect.
       </p>
     </div>
   </header>
 
-  <section class="section">
-    <div class="shell">
-      <h2 class="sec-title">The regulars</h2>
-      <div class="prog-grid">
-        {formats.map((f) => (
-          <article class="prog-card">
-            <img src={f.img} alt={f.alt} loading="lazy" />
-            <h3>{f.name}</h3>
-            <p>{f.desc}</p>
-          </article>
-        ))}
-      </div>
-    </div>
-  </section>
-
   <section class="section cc-last">
     <div class="shell">
-      <h2 class="sec-title">Named programs</h2>
-      <div class="named-grid">
-        <article class="named named-green">
-          <h3>First Light Film Festival</h3>
-          <p>
-            A festival for emerging AAPI filmmakers in Brooklyn, which we co-organize with partners
-            including the Brooklyn Arts Council. Submissions and screenings are announced on Instagram.
-          </p>
-          <a class="link-light" href="https://www.instagram.com/fuzhouamerica">Follow for the next edition</a>
-        </article>
-        <article class="named named-ink">
-          <h3>Fuzhou College Coalition</h3>
-          <p>
-            Our network for the next generation on campus: connecting Fuzhounese students across schools,
-            so nobody navigates college as the only FJ in the room.
-          </p>
-          <p class="named-note">Ask about it at any event, or write to <a href="mailto:info@fuzhouamerica.org">info@fuzhouamerica.org</a>.</p>
-        </article>
+      <h2 class="sec-title">What we host</h2>
+      <div class="type-grid">
+        {types.map((t) => (
+          <article class="type-card">
+            {t.img && <img src={t.img} alt={t.alt} loading="lazy" />}
+            <div class="type-text">
+              <h3>{t.name}</h3>
+              <p>{t.desc}</p>
+            </div>
+          </article>
+        ))}
       </div>
     </div>
   </section>
@@ -92,73 +87,36 @@ const formats = [
     color: #fff;
     font-weight: 700;
   }
-  .prog-grid {
+  .type-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 22px;
+    grid-template-columns: repeat(auto-fill, minmax(255px, 1fr));
+    gap: 18px;
+    align-items: start;
   }
-  .prog-card {
+  .type-card {
     background: #fff;
-    padding: 10px 10px 20px;
-    box-shadow: var(--shadow-warm);
+    border: 1px solid var(--hair);
+    border-top: 4px solid var(--red);
   }
-  .prog-card img {
+  .type-card img {
     width: 100%;
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 3 / 2;
     object-fit: cover;
   }
-  .prog-card h3 {
+  .type-text {
+    padding: 16px 18px 20px;
+  }
+  .type-card h3 {
     font-family: var(--display);
     font-weight: 400;
-    font-size: 28px;
+    font-size: 26px;
     letter-spacing: 0.03em;
     text-transform: uppercase;
-    margin: 14px 8px 0;
+    margin: 0;
   }
-  .prog-card p {
-    margin: 6px 8px 0;
-    font-size: 14.5px;
+  .type-card p {
+    margin: 6px 0 0;
+    font-size: 14px;
     color: var(--ink-soft);
-  }
-  .named-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 22px;
-  }
-  .named {
-    padding: 28px 30px 30px;
-    color: var(--paper);
-  }
-  .named-green {
-    background: var(--mahjong);
-  }
-  .named-ink {
-    background: var(--ink);
-  }
-  .named h3 {
-    font-family: var(--display);
-    font-weight: 400;
-    font-size: clamp(28px, 3vw, 38px);
-    letter-spacing: 0.03em;
-    text-transform: uppercase;
-    margin: 0 0 10px;
-  }
-  .named p {
-    font-size: 15px;
-    color: rgba(242, 240, 233, 0.94);
-    max-width: 52ch;
-  }
-  .named .named-note {
-    margin-top: 14px;
-    font-size: 13.5px;
-    color: rgba(242, 240, 233, 0.8);
-  }
-  .named a {
-    color: inherit;
-  }
-  @media (max-width: 860px) {
-    .named-grid {
-      grid-template-columns: 1fr;
-    }
   }
 </style>

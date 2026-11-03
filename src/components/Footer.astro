@@ -1,7 +1,6 @@
 ---
-// beehiiv subscribe form (dashboard: Grow -> Subscribe Forms).
-// Clear this to fall back to a link to the hosted subscribe page.
-const BEEHIIV_FORM_ID = 'e2fb6eff-997e-49e0-9395-dae1bed1cd85';
+// Signups go to the hosted beehiiv page; an inline embed made the third door
+// taller than its siblings, so the door is a plain link like the others.
 const year = new Date().getFullYear();
 ---
 
@@ -19,22 +18,10 @@ const year = new Date().getFullYear();
           <span class="door-name">Subtle Fuzhou Traits</span>
           <span class="door-desc">Our Facebook group, where the community talks every day.</span>
         </a>
-        <div class="door cc-form">
+        <a class="door" href="https://fuzhou.beehiiv.com/subscribe">
           <span class="door-name">Event announcements</span>
           <span class="door-desc">We only email when it is big: think TTM and Lunar New Year.</span>
-          {
-            BEEHIIV_FORM_ID ? (
-              <div class="newsletter-embed">
-                <script async is:inline src="https://subscribe-forms.beehiiv.com/v3/loader.js" data-beehiiv-form={BEEHIIV_FORM_ID} />
-                <noscript>
-                  <a href="https://fuzhou.beehiiv.com/subscribe" class="link-plain">Sign up for announcements</a>
-                </noscript>
-              </div>
-            ) : (
-              <a href="https://fuzhou.beehiiv.com/subscribe" class="link-plain">Sign up for announcements</a>
-            )
-          }
-        </div>
+        </a>
       </div>
       <div class="footer-socials">
         <a href="https://www.facebook.com/groups/subtlefuzhoutraits" aria-label="Facebook group">
