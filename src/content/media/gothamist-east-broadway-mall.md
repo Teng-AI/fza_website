@@ -6,4 +6,5 @@ order: 23
 author: Arya Sundaram
 year: 2023
 theme: chinatown
+summary: "East Broadway Mall, long the heart of the Fujianese community, seen through a daughter of smuggled parents as it is rebuilt."
 ---

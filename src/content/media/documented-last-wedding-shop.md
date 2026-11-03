@@ -6,4 +6,5 @@ order: 24
 author: Jessica Shuran Yu
 year: 2024
 theme: chinatown
+summary: "Fujianese Thanksgiving Day weddings and the last bridal shop on East Broadway."
 ---

@@ -2,12 +2,15 @@
 import '../styles/global.css';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
+import { stat } from '../data/site';
 
 const {
   title,
-  description = 'Community, arts and history for Fuzhou Americans. From Fuzhou to the world: a 501(c)(3) nonprofit with 10k+ members across platforms.',
+  description = `Community, arts and history for Fuzhou Americans. From Fuzhou to the world: a 501(c)(3) nonprofit with ${stat('members')} members across platforms.`,
   current = '',
   ogImage = '/og-image.png',
+  // Extra JSON-LD objects for this page, rendered after the site-wide organization schema
+  schema = [],
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -65,7 +68,10 @@ const orgSchema = {
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImageURL} />
 
-    <script is:inline type="application/ld+json" set:html={JSON.stringify(orgSchema)} />
+    {[orgSchema, ...schema].map((s) => (
+      // Escape "<" so no content string can close the script tag early
+      <script is:inline type="application/ld+json" set:html={JSON.stringify(s).replace(/</g, '\\u003c')} />
+    ))}
   </head>
   <body>
     <Nav current={current} />

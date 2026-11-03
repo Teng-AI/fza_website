@@ -5,4 +5,6 @@ url: https://www.nytimes.com/2001/07/22/nyregion/fujian-usa-a-special-report-wit
 order: 12
 year: 2001
 theme: chinatown
+summary: "The Times on the four-block Fujianese Chinatown taking shape inside Manhattan's Chinatown, and its storefront job agencies."
+author: "Susan Sachs"
 ---

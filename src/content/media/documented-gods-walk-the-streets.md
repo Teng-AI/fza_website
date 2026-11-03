@@ -7,4 +7,5 @@ author: Aorui Pi
 year: 2026
 theme: second-gen
 featured: 5
+summary: "Fuzhounese families in Sunset Park run the yearly Youshen parade of gods, with young people joining in since 2022."
 ---

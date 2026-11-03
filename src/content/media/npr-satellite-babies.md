@@ -6,4 +6,5 @@ order: 29
 author: Hansi Lo Wang
 year: 2016
 theme: second-gen
+summary: "Children born in the U.S. and raised by grandparents in China, and the hard return to parents they barely know."
 ---

@@ -7,4 +7,5 @@ author: Patrick Radden Keefe
 year: 2009
 theme: history
 kind: book
+summary: "Sister Ping, the Fuk Ching gang, and the Golden Venture at book length."
 ---

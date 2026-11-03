@@ -6,4 +6,5 @@ order: 20
 author: Patrick Radden Keefe
 year: 2008
 theme: immigration
+summary: "Part of Keefe's China's Great Migration series: a dispatch from Sister Ping's home village."
 ---

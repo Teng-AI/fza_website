@@ -6,4 +6,6 @@ order: 5
 year: 2014
 theme: food
 featured: 2
+author: "Lauren Hilgers"
+summary: "Follows a cook from near Fuzhou from the Eldridge Street job agencies to restaurant kitchens in Maryland and beyond."
 ---

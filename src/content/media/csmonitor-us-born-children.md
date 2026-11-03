@@ -6,4 +6,5 @@ order: 27
 author: Violet Law
 year: 2014
 theme: second-gen
+summary: "The Fujian end of the satellite-baby story: 10,000 to 20,000 US-born children being raised in Fuzhou."
 ---

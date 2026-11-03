@@ -59,6 +59,18 @@ for (const file of htmlFiles) {
   }
 }
 
+// 3. Every reading-room entry renders on /culture (an article with no matching theme would
+//    otherwise drop off the page without an error).
+const mediaCount = readdirSync('src/content/media').filter((n) => n.endsWith('.md')).length;
+const culturePath = join(DIST, 'culture', 'index.html');
+const renderedCount = existsSync(culturePath)
+  ? (readFileSync(culturePath, 'utf8').match(/class="press-item[ "]/g) ?? []).length
+  : 0;
+if (renderedCount !== mediaCount) {
+  console.error(`READING ROOM: ${mediaCount} media files but ${renderedCount} entries on /culture`);
+  errors++;
+}
+
 console.log(`Checked ${htmlFiles.length} pages.`);
 if (errors) {
   console.error(`${errors} problem(s) found.`);

@@ -6,4 +6,5 @@ order: 11
 author: Rong Xiaoqing
 year: 2017
 theme: immigration
+summary: "Reports from Ting Jiang, Sister Ping's home turf, following emigrants who prospered, broke down, or went home."
 ---

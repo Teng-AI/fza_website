@@ -1,46 +1,18 @@
 ---
-// The community shelf: works the community makes and FZA champions, with maker credits.
-// Shown on the homepage and /culture; edit in one place. Order set by Teng (Nov 2026).
-const works = [
-  {
-    href: 'https://www.instagram.com/flavorsoffujian',
-    name: 'Flavors of Fujian',
-    desc: 'Fujianese food stories, dish by dish.',
-    credit: 'By Allen Cao & Jess Eng',
-  },
-  {
-    href: 'https://threegolds.app/',
-    name: 'Three Golds Mahjong',
-    desc: 'A mahjong app that plays Fuzhou style.',
-    credit: 'By Teng Zheng',
-  },
-  {
-    href: 'https://seedandspark.com/fund/funeral-procession-of-fireflies',
-    name: 'A Funeral Procession of Fireflies',
-    desc: 'A feature film in development, set in 1990s Fuzhou.',
-    credit: 'By Cynthia Lin & Weijia Zhou',
-  },
-  {
-    href: 'https://fuzhounese.org/',
-    name: 'Fuzhounese-English Dictionary',
-    desc: 'Look up the words your family actually says.',
-    credit: 'By Noah Lee',
-  },
-  {
-    href: 'https://www.fuzhoufood.com/',
-    name: 'Fuzhou Food',
-    desc: "Home recipes from Fuzhou, one of China's eight great cuisines.",
-    credit: 'By brothers Ray & Rich',
-  },
-];
+// "From our community": works the community makes and FZA champions, with maker credits.
+// Shown on the homepage and /culture. Each project is a file in src/content/projects/;
+// `order` sets the sequence.
+import { getProjects } from '../lib/content';
+
+const works = await getProjects();
 ---
 
 <div class="shelf">
   {works.map((w) => (
-    <a class="tile" href={w.href}>
-      <span class="tile-name">{w.name}</span>
-      <span class="tile-desc">{w.desc}</span>
-      <span class="tile-credit">{w.credit}</span>
+    <a class="tile" href={w.data.url}>
+      <span class="tile-name">{w.data.name}</span>
+      <span class="tile-desc">{w.data.desc}</span>
+      <span class="tile-credit">{w.data.credit}</span>
     </a>
   ))}
 </div>

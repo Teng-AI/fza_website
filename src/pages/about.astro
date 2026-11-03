@@ -1,12 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
-
-const stats = [
-  { number: '10k+', caption: 'Members across all platforms' },
-  { number: '2500+', caption: 'People gathered through events' },
-  { number: '100+', caption: 'Cities represented in our community' },
-  { number: '25+', caption: 'Countries represented in our community' },
-];
+import { stats, stat } from '../data/site';
 
 const timeline = [
   { year: '2019', text: 'Founded in New York, NY' },
@@ -20,7 +14,7 @@ const timeline = [
 
 <Base
   title="About | Fuzhou America"
-  description="Why Fuzhou America exists: our mission, vision, and progress. 10k+ members across platforms, 100+ cities, 25+ countries."
+  description={`Why Fuzhou America exists: our mission, our story since 2019, and what we've built. ${stat('members')} members across platforms, ${stat('cities')} cities, ${stat('countries')} countries.`}
   current="about"
 >
   <header class="page-head">

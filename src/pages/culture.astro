@@ -2,29 +2,83 @@
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import Shelf from '../components/Shelf.astro';
+import { readingThemes } from '../data/site';
+import { getProjects, decodeEntities } from '../lib/content';
 
 const media = await getCollection('media');
 const articles = media.filter((m) => m.data.kind === 'article');
-const longerShelf = media.filter((m) => m.data.kind !== 'article').sort((a, b) => a.data.order - b.data.order);
+const booksAndFilm = media.filter((m) => m.data.kind !== 'article').sort((a, b) => a.data.order - b.data.order);
+const projects = await getProjects();
 
-const themes = [
-  { key: 'history', label: 'History' },
-  { key: 'immigration', label: 'Immigration' },
-  { key: 'chinatown', label: 'Chinatown' },
-  { key: 'food', label: 'Food' },
-  { key: 'second-gen', label: 'Second generation' },
-] as const;
-
-const byTheme = themes.map((t) => ({
+const byTheme = readingThemes.map((t) => ({
   ...t,
   items: articles.filter((m) => m.data.theme === t.key).sort((a, b) => a.data.order - b.data.order),
 }));
+
+const pageURL = new URL('/culture', Astro.site).href;
+const schemaType = { article: 'Article', book: 'Book', film: 'Movie' } as const;
+
+const workSchema = (m: (typeof media)[number]) => {
+  const { kind, title, url, author, year, outlet, publisher, summary } = m.data;
+  const person = author ? { '@type': 'Person', name: author } : undefined;
+  return {
+    '@type': schemaType[kind],
+    name: decodeEntities(title),
+    url,
+    ...(summary && { description: summary }),
+    ...(year && { datePublished: String(year) }),
+    ...(person && (kind === 'film' ? { director: person } : { author: person })),
+    ...(kind !== 'film' && { publisher: { '@type': 'Organization', name: publisher ?? outlet } }),
+  };
+};
+
+const listed = [
+  ...projects.map((p) => ({
+    '@type': 'CreativeWork',
+    name: p.data.name,
+    url: p.data.url,
+    description: p.data.desc,
+    creator: p.data.creators.map((name) => ({ '@type': 'Person', name })),
+  })),
+  ...byTheme.flatMap((t) => t.items.map(workSchema)),
+  ...booksAndFilm.map(workSchema),
+];
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: 'Fuzhounese American history, books, and films',
+    url: pageURL,
+    inLanguage: 'en',
+    about: [
+      { '@type': 'Thing', name: 'Fuzhounese Americans' },
+      { '@type': 'Language', name: 'Fuzhounese', alternateName: ['Foochow', 'Fuzhou dialect', '福州话'] },
+    ],
+    publisher: { '@type': 'NonprofitOrganization', name: 'Fuzhou America', url: 'https://www.fuzhouamerica.org' },
+    mainEntity: {
+      '@type': 'ItemList',
+      numberOfItems: listed.length,
+      itemListElement: listed.map((item, i) => ({ '@type': 'ListItem', position: i + 1, item })),
+    },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: new URL('/', Astro.site).href },
+      { '@type': 'ListItem', position: 2, name: 'Culture', item: pageURL },
+    ],
+  },
+];
 ---
 
 <Base
-  title="Culture | Fuzhou America"
-  description="The Fuzhou America culture shelf: the dictionary, films, food stories, and a reading room of journalism on the Fuzhounese-American experience."
+  title="Fuzhounese American History, Books & Films | Fuzhou America"
+  description="Journalism, books, and films on Fuzhounese (Foochow) Americans, from the Golden Venture to East Broadway, plus projects our community makes."
   current="culture"
+  ogImage="/images/og/culture.jpg"
+  schema={schema}
 >
   <header class="page-head">
     <div class="shell page-head-inner">
@@ -38,6 +92,12 @@ const byTheme = themes.map((t) => ({
 
   <section class="section">
     <div class="shell">
+      <p class="culture-intro">
+        Fuzhounese Americans trace their families to Fuzhou, the capital of Fujian province on China's southeast
+        coast. Large numbers came to New York from the 1980s on, built a community around East Broadway in
+        Manhattan's Chinatown and in Sunset Park, Brooklyn, and opened takeout restaurants across the country. Our
+        dialect is Fuzhounese (<span lang="zh">福州话</span>), also written Foochow.
+      </p>
       <h2 class="sec-title">From our community</h2>
       <Shelf />
     </div>
@@ -62,6 +122,7 @@ const byTheme = themes.map((t) => ({
                     {m.data.author}{m.data.author && m.data.year ? ', ' : ''}{m.data.year}
                   </span>
                 )}
+                {m.data.summary && <span class="press-summary">{m.data.summary}</span>}
               </a>
             ))}
           </div>
@@ -70,18 +131,19 @@ const byTheme = themes.map((t) => ({
     </div>
   </section>
 
-  <section class="section cc-last">
+  <section class="section cc-last" id="books-and-film">
     <div class="shell">
-      <h2 class="sec-title">The longer shelf</h2>
-      <p class="sec-lede">Books and film, for when an article is not enough.</p>
+      <h2 class="sec-title">Books &amp; film</h2>
+      <p class="sec-lede">For when an article is not enough.</p>
       <div class="press-grid">
-        {longerShelf.map((m) => (
+        {booksAndFilm.map((m) => (
           <a class="press-item" href={m.data.url}>
             <span class="press-outlet">{m.data.outlet}</span>
             <span class="press-title" set:html={`“${m.data.title}”`} />
             <span class="press-meta">
               {m.data.kind === 'book' ? 'Book' : 'Documentary'} by {m.data.author}, {m.data.year}
             </span>
+            {m.data.summary && <span class="press-summary">{m.data.summary}</span>}
           </a>
         ))}
       </div>
@@ -90,9 +152,11 @@ const byTheme = themes.map((t) => ({
 </Base>
 
 <style>
-  .head-link {
-    color: #fff;
-    font-weight: 700;
+  .culture-intro {
+    max-width: 68ch;
+    margin: 0 0 clamp(32px, 5vw, 48px);
+    font-size: 17px;
+    line-height: 1.65;
   }
   .room-group {
     margin-bottom: 36px;
@@ -108,5 +172,12 @@ const byTheme = themes.map((t) => ({
     text-transform: uppercase;
     color: var(--red-deep);
     margin: 0 0 4px;
+  }
+  .press-summary {
+    display: block;
+    margin-top: 8px;
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: var(--ink-soft);
   }
 </style>

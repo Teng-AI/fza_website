@@ -6,4 +6,5 @@ order: 17
 author: Rong Xiaoqing
 year: 2021
 theme: second-gen
+summary: "Three millennial candidates, the first Fujianese immigrants to run for office in New York."
 ---

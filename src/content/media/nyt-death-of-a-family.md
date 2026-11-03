@@ -6,4 +6,6 @@ order: 2
 year: 2013
 theme: history
 featured: 1
+author: "Vivian Yee"
+summary: "Looks back on the 2013 killing of Qiao Zhen Li and her four children in their Sunset Park, Brooklyn, home."
 ---

@@ -6,4 +6,5 @@ order: 14
 author: Irene Jay Liu
 year: 2007
 theme: immigration
+summary: "Traces the Fujianese network from East Broadway's fish ball factory and buses back to a near-empty village in Fujian."
 ---

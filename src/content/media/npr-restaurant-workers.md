@@ -6,4 +6,5 @@ order: 26
 author: Margot Adler
 year: 2007
 theme: food
+summary: "Anthropologist Kenneth Guest tours East Broadway Mall, hub of the Fujianese restaurant trade."
 ---

@@ -5,4 +5,5 @@ url: https://www.theatlantic.com/family/archive/2019/10/satellite-babies-years-c
 order: 6
 year: 2019
 theme: second-gen
+summary: "U.S.-born children sent abroad to be raised by relatives in their early years, and the adjustment when they return to their parents."
 ---

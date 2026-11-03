@@ -6,4 +6,5 @@ order: 19
 author: Katie Salisbury
 year: 2018
 theme: food
+summary: "Cooks and delivery workers, many from Fujian, carrying smuggling debt and hired through Eldridge Street job agencies."
 ---
