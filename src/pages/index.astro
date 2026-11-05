@@ -72,7 +72,7 @@ const media = (await getCollection('media')).filter((m) => m.data.featured).sort
   <section class="section">
     <div class="shell">
       <h2 class="sec-title">From our community</h2>
-      <Shelf />
+      <Shelf limit={4} />
     </div>
   </section>
 
