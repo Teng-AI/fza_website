@@ -1,10 +1,18 @@
 ---
 // "From our community": works the community makes and FZA champions, with maker credits.
 // Shown on the homepage and /culture. Each project is a file in src/content/projects/;
-// `order` sets the sequence.
+// `order` sets the sequence. Pass `limit` to show only the first few, with a link to the
+// full list on /culture (the homepage does this).
 import { getProjects } from '../lib/content';
 
-const works = await getProjects();
+interface Props {
+  limit?: number;
+}
+
+const { limit } = Astro.props;
+const all = await getProjects();
+const works = limit === undefined ? all : all.slice(0, limit);
+const more = all.length > works.length;
 ---
 
 <div class="shelf">
@@ -16,3 +24,8 @@ const works = await getProjects();
     </a>
   ))}
 </div>
+{more && (
+  <p class="shelf-more">
+    <a class="btn btn-red" href="/culture#community">See all projects</a>
+  </p>
+)}

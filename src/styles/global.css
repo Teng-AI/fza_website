@@ -580,6 +580,10 @@ p:last-child {
   }
 }
 
+.shelf-more {
+  margin-top: 28px;
+}
+
 /* ---------- Snapshot wall ---------- */
 
 .wall {

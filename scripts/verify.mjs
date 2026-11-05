@@ -76,6 +76,35 @@ if (renderedCount !== mediaCount) {
   errors++;
 }
 
+// 4. The homepage shows only the first HOME_TILES community projects plus a link to the full
+//    list on /culture, and /culture shows every project.
+const HOME_TILES = 4;
+const projectCount = readdirSync('src/content/projects').filter((n) => n.endsWith('.md')).length;
+const tilesIn = (page) => {
+  const p = join(DIST, page);
+  return existsSync(p) ? (readFileSync(p, 'utf8').match(/class="tile"/g) ?? []).length : 0;
+};
+const homeHtml = existsSync(join(DIST, 'index.html')) ? readFileSync(join(DIST, 'index.html'), 'utf8') : '';
+const homeTiles = tilesIn('index.html');
+const cultureTiles = tilesIn(join('culture', 'index.html'));
+if (homeTiles !== Math.min(HOME_TILES, projectCount)) {
+  console.error(`COMMUNITY: homepage shows ${homeTiles} project tiles, expected ${Math.min(HOME_TILES, projectCount)}`);
+  errors++;
+}
+if (projectCount > HOME_TILES && !homeHtml.includes('href="/culture#community"')) {
+  console.error('COMMUNITY: homepage has no link to /culture#community');
+  errors++;
+}
+const cultureHtml = existsSync(join(DIST, 'culture', 'index.html')) ? readFileSync(join(DIST, 'culture', 'index.html'), 'utf8') : '';
+if (!cultureHtml.includes('id="community"')) {
+  console.error('COMMUNITY: /culture has no id="community" anchor for the homepage link');
+  errors++;
+}
+if (cultureTiles !== projectCount) {
+  console.error(`COMMUNITY: ${projectCount} project files but ${cultureTiles} tiles on /culture`);
+  errors++;
+}
+
 console.log(`Checked ${htmlFiles.length} pages.`);
 if (errors) {
   console.error(`${errors} problem(s) found.`);
